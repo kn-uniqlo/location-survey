@@ -1,0 +1,124 @@
+[
+  {
+    "id": "1FSYrDpp0OtFQeNslWiqActCinrpYXjYv",
+    "name": "1052 สาขา Central Chiang Rai",
+    "address": "123/4 ถนนบรรพปราการ ตำบลเวียง อำเภอเมืองเชียงราย เชียงราย 57000",
+    "hours": "10:00 - 22:00 น.",
+    "phone": "02-123-4567",
+    "transport": "VIEW MAP",
+    "mapLink": "https://maps.google.com/?q=Central+Chiang+Rai"
+  },
+  {
+    "id": "1ozu6sDBe452LAs5uNHOOWqgVZhwxcRv0",
+    "name": "1058 สาขา Samyan Mitrtown",
+    "address": "944 ถนนพระรามที่ 4 แขวงวังใหม่ เขตปทุมวัน กรุงเทพฯ 10330",
+    "hours": "10:00 - 22:00 น.",
+    "phone": "02-123-4567",
+    "transport": "VIEW MAP",
+    "mapLink": "https://maps.google.com/?q=Samyan+Mitrtown"
+  },
+  {
+    "id": "1k-ZvY5QrZ_bYzI8Kz5qeVZt4lky8YTVx",
+    "name": "1059 สาขา Roadside Nawamin",
+    "address": "234 ถนนนวมินทร์ แขวงนวมินทร์ เขตบึงกุ่ม กรุงเทพฯ 10240",
+    "hours": "10:00 - 22:00 น.",
+    "phone": "02-123-4567",
+    "transport": "รถโดยสารสาธารณะสาย 44, 524"
+  },
+  {
+    "id": "1VWQ9TClQvDUFa0peUoSjDAKSKrwbV4E2",
+    "name": "1060 สาขา Central Chonburi",
+    "address": "789 ถนนสุขุมวิท ตำบลบางปลาสร้อย อำเภอเมืองชลบุรี ชลบุรี 20000",
+    "hours": "10:00 - 22:00 น.",
+    "phone": "02-123-4567",
+    "transport": "รถสองแถวสายพัทยา-ชลบุรี"
+  },
+  {
+    "id": "1rjEMWZnrVuAxDvmomuheBIV5eptHwd3K",
+    "name": "1061 สาขา Fashion Island",
+    "address": "456 ถนนคันนายาว แขวงคันนายาว เขตคันนายาว กรุงเทพฯ 10230",
+    "hours": "10:00 - 22:00 น.",
+    "phone": "02-123-4567",
+    "transport": "รถโดยสารสาธารณะสาย 26, 27, 28"
+  },
+  {
+    "id": "1t7XX1L1Qteut9ptuZE0PCZMHTYZJlEbK",
+    "name": "1063 สาขา Central Plaza Sriracha",
+    "address": "999/9 ถนนสุขุมวิท ตำบลศรีราชา อำเภอศรีราชา ชลบุรี 20110",
+    "hours": "10:00 - 22:00 น.",
+    "phone": "02-123-4567",
+    "transport": "รถสองแถวสายศรีราชา-บางพระ"
+  },
+  {
+    "id": "1SQZb8BlS_lEJDq4VFSHzKz7wHy0mGgEa",
+    "name": "1065 สาขา The Mall Thaphra",
+    "address": "321 ถนนเจริญนคร แขวงบางลำภูล่าง เขตคลองสาน กรุงเทพฯ 10600",
+    "hours": "10:00 - 22:00 น.",
+    "phone": "02-123-4567",
+    "transport": "BTS สถานีวงเวียนใหญ่"
+  },
+  {
+    "id": "1aqrYmjnZMou6n6XtTHYOdARk5apdMZww",
+    "name": "1067 สาขา Central Ubon Ratchathani",
+    "address": "555 ถนนชยางกูร ตำบลในเมือง อำเภอเมืองอุบลราชธานี อุบลราชธานี 34000",
+    "hours": "10:00 - 22:00 น.",
+    "phone": "02-123-4567",
+    "transport": "รถโดยสารสาธารณะในเมืองอุบลราชธานี"
+  },
+  {
+    "id": "1JGgw4fvOvT2dt_L6PioJ5ORzc-vKAevL",
+    "name": "1068 สาขา Robinson Chachoengsao",
+    "address": "222 ถนนศรีโสธร ตำบลบางปลากด อำเภอเมืองฉะเชิงเทรา ฉะเชิงเทรา 24000",
+    "hours": "10:00 - 22:00 น.",
+    "phone": "02-123-4567",
+    "transport": "รถสองแถวสายฉะเชิงเทรา-บางปะกง"
+  },
+  {
+    "id": "1nE47EJqabg-DQow7g8UVOZk7x1XH6SVr",
+    "name": "1069 สาขา Robinson Kanchanaburi",
+    "address": "333 ถนนแสงชูโต ตำบลปากแพรก อำเภอเมืองกาญจนบุรี กาญจนบุรี 71000",
+    "hours": "10:00 - 22:00 น.",
+    "phone": "02-123-4567",
+    "transport": "รถโดยสารสาธารณะในเมืองกาญจนบุรี"
+  },
+  {
+    "id": "1ZTBkdgm642tqCzIoIwgaJFek2C-irhX9",
+    "name": "1070 สาขา Robinson Buriram",
+    "address": "444 ถนนนิวาส ตำบลในเมือง อำเภอเมืองบุรีรัมย์ บุรีรัมย์ 31000",
+    "hours": "10:00 - 22:00 น.",
+    "phone": "02-123-4567",
+    "transport": "รถโดยสารสาธารณะในเมืองบุรีรัมย์"
+  },
+  {
+    "id": "1laNki1Vz-4wlwE2ptdm6VDoc7mw0XyuA",
+    "name": "1071 สาขา Terminal 21 Rama 3",
+    "address": "888 ถนนพระรามที่ 3 แขวงบางโพงพาง เขตยานนาวา กรุงเทพฯ 10120",
+    "hours": "10:00 - 22:00 น.",
+    "phone": "02-123-4567",
+    "transport": "BTS สถานีวงเวียนใหญ่ แล้วต่อรถโดยสาร"
+  },
+  {
+    "id": "10PA3ZiyXm8gtXOYjS-FQPBxVvOknmABI",
+    "name": "1072 สาขา Roadside Lat Krabang",
+    "address": "777 ถนนลาดกระบัง แขวงลาดกระบัง เขตลาดกระบัง กรุงเทพฯ 10520",
+    "hours": "10:00 - 22:00 น.",
+    "phone": "02-123-4567",
+    "transport": "รถโดยสารสาธารณะสาย 25, 40, 340"
+  },
+  {
+    "id": "1yyrtq12cY9tkwgdePjIVnBD2ru7K0f2B",
+    "name": "1073 สาขา Central Plaza Ram-Indra",
+    "address": "666 ถนนรามอินทรา แขวงคันนายาว เขตคันนายาว กรุงเทพฯ 10230",
+    "hours": "10:00 - 22:00 น.",
+    "phone": "02-123-4567",
+    "transport": "รถโดยสารสาธารณะสาย 92, 134, 187"
+  },
+  {
+    "id": "1GdMEvgOpWg5coOOXGK7d4hFM3I9BrGTt",
+    "name": "1074 สาขา Roadside Khonkaen",
+    "address": "111 ถนนศรีจันทร์ ตำบลในเมือง อำเภอเมืองขอนแก่น ขอนแก่น 40000",
+    "hours": "10:00 - 22:00 น.",
+    "phone": "02-123-4567",
+    "transport": "รถโดยสารสาธารณะในเมืองขอนแก่น"
+  }
+]
