@@ -1,29 +1,10 @@
 [
   {
-    "id": "Location Inspection Survey_1052 Central Chiang Rai",
     "name": "1052 สาขา Central Chiang Rai",
-    "address": "123/4 ถนนบรรพปราการ ตำบลเวียง อำเภอเมืองเชียงราย เชียงราย 57000",
-    "hours": "10:00 - 22:00 น.",
-    "phone": "02-123-4567",
-    "transport": "VIEW MAP",
-    "mapLink": "https://maps.google.com/?q=Central+Chiang+Rai"
+    "pdfUrl": "https://raw.githubusercontent.com/kn-uniqlo/location-survey/main/Location Inspection Survey_1052 Central Chiang Rai.pdf"
   },
   {
-    "id": "Location Inspection Survey_1059 Roadside Nawamin",
     "name": "1059 สาขา Roadside Nawamin",
-    "address": "234 ถนนนวมินทร์ แขวงนวมินทร์ เขตบึงกุ่ม กรุงเทพฯ 10240",
-    "hours": "10:00 - 22:00 น.",
-    "phone": "02-123-4567",
-    "transport": "รถโดยสารสาธารณะสาย 44, 524"
-    "mapLink": "https://maps.google.com/?q=Uniqlo+Roadside+Nawamin"
-  },
-  {
-    "id": "Location Inspection Survey_1061 Fashion Island",
-    "name": "1061 สาขา Fashion Island",
-    "address": "456 ถนนคันนายาว แขวงคันนายาว เขตคันนายาว กรุงเทพฯ 10230",
-    "hours": "10:00 - 22:00 น.",
-    "phone": "02-123-4567",
-    "transport": "รถโดยสารสาธารณะสาย 26, 27, 28"
-    "mapLink": "https://maps.google.com/?q=Fashion+Island"
-  },
+    "pdfUrl": "https://raw.githubusercontent.com/kn-uniqlo/location-survey/main/Location Inspection Survey_1059 Roadside Nawamin.pdf"
+  }
 ]
