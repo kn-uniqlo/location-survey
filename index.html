@@ -149,7 +149,7 @@
       var pagesRead = new Set();
       var readAllPages = false;
       var pageStartTime = Date.now();
-      var minPageTime = 10000; // 10 seconds in milliseconds
+      var minPageTime = 5000; // 5 seconds in milliseconds
       var canChangePage = true;
       var startTime = Date.now();
       
@@ -212,6 +212,7 @@
       
       // Function to load new PDF
       function loadNewPdf(id) {
+          currentPDFId = id;
           url = `https://raw.githubusercontent.com/kn-uniqlo/location-survey/main/${id}.pdf`;
           pdfjsLib.getDocument(url).promise.then(function(pdfDoc_) {
           pdfDoc = pdfDoc_;
