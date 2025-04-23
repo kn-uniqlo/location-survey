@@ -1,25 +1,94 @@
+/* Canvas Container */
+.pdf-viewer {
+    position: relative;
+    width: 90%;
+    max-width: 1200px;
+    margin: 2rem auto;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    background: #1e1e1e;
+    padding: 20px;
+}
+
+/* Canvas Element */
+#the-canvas {
+    width: 100%;
+    height: auto;
+    min-height: 600px;
+    background: #2d2d2d;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+/* Hover Effect */
+#the-canvas:hover {
+    transform: scale(1.005);
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.4);
+}
+
+/* Loading Animation */
+.pdf-viewer.loading::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 50px;
+    height: 50px;
+    border: 4px solid #fff;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    z-index: 10;
+}
+
+@keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Scrollbar Styling */
+.pdf-viewer::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.pdf-viewer::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+.pdf-viewer::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+}
+
+.pdf-viewer::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .pdf-viewer {
+        width: 95%;
+        padding: 10px;
+    }
+    
     #the-canvas {
-      position: center;
-      width: 70%;
-      height: auto;
-      border: 1px solid black;
-      direction: ltr;
+        min-height: 400px;
     }
-    .read-status {
-      color: green;
-      font-weight: bold;
-      margin-left: 5px;
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    .pdf-viewer {
+        background: #121212;
     }
-    #read-btn {
-      margin-left: 20px;
-      background-color: #4CAF50;
-      color: white;
+    
+    #the-canvas {
+        background: #1a1a1a;
+        border-color: rgba(255, 255, 255, 0.05);
     }
-    #read-btn:disabled {
-      background-color: #ccc;
-      cursor: not-allowed;
-    }
-    button:disabled {
-      cursor: not-allowed;
-      opacity: 0.5;
-    }
+}
