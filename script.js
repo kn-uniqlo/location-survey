@@ -16,7 +16,7 @@ let startTime = Date.now();
 
 // Function to load branches data
 async function loadBranches() {
-    const response = await fetch('Branches.json');
+    const response = await fetch('branches.json');
     branchesData = await response.json();
     populateSearch();
 }
