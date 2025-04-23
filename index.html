@@ -26,20 +26,10 @@
         </span>
     </div>
 
-    <!-- PDF Container -->
-    <div class="pdf-container">
-        <!-- Loading State -->
-        <div id="loading" class="loading">
-            <div class="loading-icon"><i class="fas fa-file-pdf"></i></div>
-            <div class="loading-text">กรุณาเลือกสาขาเพื่อแสดง Location Survey</div>
-            <div>ระบบจะแสดงข้อมูลรายละเอียดของสาขาที่คุณเลือก</div>
-        </div>
-
-        <!-- PDF Viewer -->
-        <div class="pdf-viewer" style="display: none;">
-            <canvas id="the-canvas"></canvas>
-        </div>
+    <div class="pdf-viewer" style="display: none;">
+        <canvas id="the-canvas"></canvas>
     </div>
+
 
 <script src="//mozilla.github.io/pdf.js/build/pdf.mjs" type="module"></script>
 <script type="module">
