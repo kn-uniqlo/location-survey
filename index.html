@@ -43,13 +43,22 @@
           </div>
         
         <!-- PDF Controls -->
-          <div>
-            <button id="prev">Previous</button>
-            <button id="next">Next</button>
-            <button id="read-btn" disabled>Mark as Read</button>
-            &nbsp; &nbsp;
-            <span>Page: <span id="page_num"></span> / <span id="page_count"></span></span>
-          </div>
+        <div class="pdf-controls">
+            <div class="pdf-nav">
+                <button id="prev" class="pdf-btn">
+                    <i class="fas fa-chevron-left"></i> Previous
+                </button>
+                <button id="next" class="pdf-btn">
+                    Next <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            <div class="pdf-status">
+                <span>Page: <span id="page_num"></span> / <span id="page_count"></span></span>
+            </div>
+            <button id="read-btn" class="pdf-btn read-btn" disabled>
+                <i class="fas fa-check-circle"></i> Mark as Read
+            </button>
+        </div>
           
     <canvas id="the-canvas"></canvas>
 
@@ -150,8 +159,8 @@
     
     // Function to populate search suggestions
     function populateSearch() {
-        const searchInput = document.getElementById('search');
-        const datalist = document.getElementById('branch-list');
+        const searchInput = document.getElementById('branchSearch');
+        const datalist = document.getElementById('branchList');
         
         branchesData.forEach(branch => {
         const option = document.createElement('option');
