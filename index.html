@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Uniqlo Location Survey</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
     <h1>Test PDF จับเวลาและล็อคปุ่มเปลี่ยนหน้าเป็นเวลา 10 วินาที</h1>
@@ -25,10 +26,9 @@
         </span>
     </div>
 
-    
     <canvas id="the-canvas"></canvas>
-
-
+        
+  
 
 <script src="//mozilla.github.io/pdf.js/build/pdf.mjs" type="module"></script>
 <script type="module">
@@ -102,10 +102,78 @@
     // Load branches data when the page loads
     loadBranches();
     
-    /**
-        * Get page info from document, resize canvas accordingly, and render page.
-        * @param num Page number.
-        */
+    // Add zoom functionality
+    let currentScale = 1;
+    const zoomStep = 0.1;
+    const maxScale = 3;
+    const minScale = 0.5;
+
+    function zoomIn() {
+        if (currentScale < maxScale) {
+            currentScale += zoomStep;
+            renderPage(pageNum);
+        }
+    }
+
+    function zoomOut() {
+        if (currentScale > minScale) {
+            currentScale -= zoomStep;
+            renderPage(pageNum);
+        }
+    }
+
+    // Add pan functionality
+    let isPanning = false;
+    let startX = 0, startY = 0, scrollLeft = 0, scrollTop = 0;
+
+    canvas.addEventListener('mousedown', (e) => {
+        isPanning = true;
+        startX = e.pageX - canvas.offsetLeft;
+        startY = e.pageY - canvas.offsetTop;
+        scrollLeft = canvas.scrollLeft;
+        scrollTop = canvas.scrollTop;
+    });
+
+    canvas.addEventListener('mouseup', () => {
+        isPanning = false;
+    });
+
+    canvas.addEventListener('mousemove', (e) => {
+        if (!isPanning) return;
+        e.preventDefault();
+        const x = e.pageX - canvas.offsetLeft;
+        const y = e.pageY - canvas.offsetTop;
+        const walkX = (x - startX) * 2;
+        const walkY = (y - startY) * 2;
+        canvas.scrollLeft = scrollLeft - walkX;
+        canvas.scrollTop = scrollTop - walkY;
+    });
+
+    // Add touch support for mobile devices
+    canvas.addEventListener('touchstart', (e) => {
+        isPanning = true;
+        startX = e.touches[0].pageX - canvas.offsetLeft;
+        startY = e.touches[0].pageY - canvas.offsetTop;
+        scrollLeft = canvas.scrollLeft;
+        scrollTop = canvas.scrollTop;
+    });
+
+    canvas.addEventListener('touchend', () => {
+        isPanning = false;
+    });
+
+    canvas.addEventListener('touchmove', (e) => {
+        if (!isPanning) return;
+        e.preventDefault();
+        const x = e.touches[0].pageX - canvas.offsetLeft;
+        const y = e.touches[0].pageY - canvas.offsetTop;
+        const walkX = (x - startX) * 2;
+        const walkY = (y - startY) * 2;
+        canvas.scrollLeft = scrollLeft - walkX;
+        canvas.scrollTop = scrollTop - walkY;
+    });
+
+    // Modify renderPage function to include zoom
     function renderPage(num) {
         pageRendering = true;
         // Reset page timer and lock navigation
@@ -118,7 +186,7 @@
     
         // Using promise to fetch the page
         pdfDoc.getPage(num).then(function(page) {
-        var viewport = page.getViewport({scale: scale});
+        var viewport = page.getViewport({scale: scale * currentScale});
         canvas.height = viewport.height;
         canvas.width = viewport.width;
     
@@ -237,6 +305,18 @@
     
     // Update button states initially
     updateNavigationButtons();
-    </script>
+    
+    // Add zoom controls to the UI
+    const zoomControls = document.createElement('div');
+    zoomControls.className = 'zoom-controls';
+    zoomControls.innerHTML = `
+        <button id="zoom-in" class="zoom-btn">+</button>
+        <button id="zoom-out" class="zoom-btn">-</button>
+    `;
+    document.querySelector('.pdf-controls').appendChild(zoomControls);
+
+    document.getElementById('zoom-in').addEventListener('click', zoomIn);
+    document.getElementById('zoom-out').addEventListener('click', zoomOut);
+</script>
 </body>
 </html>
