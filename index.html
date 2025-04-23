@@ -380,13 +380,13 @@
   <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
   
   <!-- เพิ่ม PDF.js -->
-  <script src="//mozilla.github.io/pdf.js/build/pdf.mjs" type="module"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
   
   <script>
     // กำหนดค่า PDF.js
-    pdfjsLib = await import('//mozilla.github.io/pdf.js/build/pdf.mjs');
-    pdfjsLib.GlobalWorkerOptions.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.mjs';
-  
+    pdfjsLib = window['pdfjs-dist/build/pdf'];
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
+    
     // Global variables
     let currentPDFId = null;
     let currentPDFDoc = null;
@@ -571,7 +571,10 @@
         
         try {
           // โหลด PDF ด้วย PDF.js
-          const loadingTask = pdfjsLib.getDocument(url);
+          const loadingTask = pdfjsLib.getDocument(url)({
+            url: url,
+            withCredentials: false
+        });
           currentPDFDoc = await loadingTask.promise;
           
           // Update branch info
