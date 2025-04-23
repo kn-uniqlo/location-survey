@@ -197,7 +197,7 @@
                 document.getElementById('mapLink').href = selectedBranch.mapLink;
                 
                 // Show the branch info section
-                document.getElementById('branchInfo').style.display = 'block';
+                document.getElementById('branchInfo').classList.add('show');
                 
                 // Load the PDF
                 loadNewPdf(branchId);
