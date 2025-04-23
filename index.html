@@ -273,6 +273,34 @@
       margin: 0 15px;
       line-height: 36px;
     }
+
+    /* เพิ่มสไตล์สำหรับ PDF viewer */
+    #pdfViewerContainer {
+      position: relative;
+      width: 100%;
+      height: 80vh;
+      overflow: auto;
+      margin: 20px 0;
+      border: 1px solid #ddd;
+    }
+    
+    #pdfCanvas {
+      display: block;
+      margin: 0 auto;
+    }
+    
+    .pdf-controls {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    
+    .page-info {
+      margin: 0 15px;
+      line-height: 36px;
+    }
+  
   </style>
 </head>
 <body>
@@ -330,7 +358,15 @@
         <div class="loading-text">กรุณาเลือกสาขาเพื่อแสดง Location Survey</div>
         <div>ระบบจะแสดงข้อมูลรายละเอียดของสาขาที่คุณเลือก</div>
       </div>
-      <div id="pdfContainer" style="display: none;"></div>
+      <div id="pdfViewerContainer" style="display: none;">
+        <canvas id="pdfCanvas"></canvas>
+        <div class="pdf-controls">
+          <button id="prevPage"><i class="fas fa-arrow-left"></i> ก่อนหน้า</button>
+          <span class="page-info">หน้า <span id="currentPage">1</span> จาก <span id="totalPages">0</span></span>
+          <button id="nextPage">ถัดไป <i class="fas fa-arrow-right"></i></button>
+        </div>
+      </div>
+  
     </div>
     
     <button onclick="toggleAdminPanel()" style="margin-top: 20px;">
@@ -393,6 +429,12 @@
     let currentPageNum = 1;
     let branchInfo = {};
     let branchNameToIdMap = {};
+    let pageRendering = false;
+    let pageNumPending = null;
+    const scale = 1.5;
+    const canvas = document.getElementById('pdfCanvas');
+    const ctx = canvas.getContext('2d');
+
     
     // กำหนดค่า Firebase
     const firebaseConfig = {
@@ -490,52 +532,86 @@
     
     // Reset PDF viewer to initial state
     function resetPDFViewer() {
-      const pdfContainer = document.getElementById('pdfContainer');
+      const pdfViewerContainer = document.getElementById('pdfViewerContainer');
       const loading = document.getElementById('loading');
-      const infoContainer = document.getElementById('branchInfo');
-      const downloadBtn = document.getElementById('downloadBtn');
-      const viewBtn = document.getElementById('viewBtn');
       
-      currentPDFId = null;
       currentPDFDoc = null;
       currentPageNum = 1;
-      pdfContainer.innerHTML = '';
+      pdfViewerContainer.style.display = 'none';
+      
       loading.innerHTML = `
         <div class="loading-icon"><i class="fas fa-file-pdf"></i></div>
         <div class="loading-text">กรุณาเลือกสาขาเพื่อแสดง Location Survey</div>
         <div>ระบบจะแสดงข้อมูลรายละเอียดของสาขาที่คุณเลือก</div>
       `;
       loading.style.display = 'flex';
-      pdfContainer.style.display = 'none';
-      infoContainer.classList.remove('show');
-      downloadBtn.disabled = true;
-      viewBtn.disabled = true;
+      
+      document.getElementById('downloadBtn').disabled = true;
+      document.getElementById('viewBtn').disabled = true;
     }
+
     
     // Render PDF page
     async function renderPage(pageNum) {
-      const pdfContainer = document.getElementById('pdfContainer');
-      const page = await currentPDFDoc.getPage(pageNum);
-      const scale = 1.5;
-      const viewport = page.getViewport({ scale });
+      pageRendering = true;
       
-      const canvas = document.createElement('canvas');
-      const context = canvas.getContext('2d');
-      canvas.height = viewport.height;
-      canvas.width = viewport.width;
-      
-      // Clear previous content
-      pdfContainer.innerHTML = '';
-      pdfContainer.appendChild(canvas);
-      
-      await page.render({
-        canvasContext: context,
-        viewport: viewport
-      }).promise;
-      
-      // Update page info
-      document.getElementById('pageInfo').textContent = `หน้า ${currentPageNum} จาก ${currentPDFDoc.numPages}`;
+      try {
+        const page = await currentPDFDoc.getPage(pageNum);
+        const viewport = page.getViewport({ scale: scale });
+        
+        // ปรับขนาด canvas
+        canvas.height = viewport.height;
+        canvas.width = viewport.width;
+        
+        // เรนเดอร์หน้า PDF
+        await page.render({
+          canvasContext: ctx,
+          viewport: viewport
+        }).promise;
+        
+        // อัปเดตข้อมูลหน้า
+        document.getElementById('currentPage').textContent = pageNum;
+        pageRendering = false;
+        
+        // หากมีการร้องขอหน้าใหม่ระหว่างเรนเดอร์
+        if (pageNumPending !== null) {
+          renderPage(pageNumPending);
+          pageNumPending = null;
+        }
+        
+      } catch (error) {
+        console.error('Error rendering page:', error);
+        pageRendering = false;
+      }
     }
+    
+    // ฟังก์ชันเปลี่ยนหน้า
+    function queueRenderPage(num) {
+      if (pageRendering) {
+        pageNumPending = num;
+      } else {
+        renderPage(num);
+      }
+    }
+    
+    // ฟังก์ชันไปหน้าถัดไป
+    function onNextPage() {
+      if (currentPageNum >= currentPDFDoc.numPages) return;
+      currentPageNum++;
+      queueRenderPage(currentPageNum);
+    }
+    
+    // ฟังก์ชันกลับหน้าก่อนหน้า
+    function onPrevPage() {
+      if (currentPageNum <= 1) return;
+      currentPageNum--;
+      queueRenderPage(currentPageNum);
+    }
+    
+    // เพิ่ม Event listeners สำหรับปุ่มเปลี่ยนหน้า
+    document.getElementById('nextPage').addEventListener('click', onNextPage);
+    document.getElementById('prevPage').addEventListener('click', onPrevPage);
+
     
     // Show PDF based on selected branch
     async function showPDF(id) {
@@ -571,10 +647,7 @@
         
         try {
           // โหลด PDF ด้วย PDF.js
-          const loadingTask = pdfjsLib.getDocument(url)({
-            url: url,
-            withCredentials: false
-        });
+          const loadingTask = pdfjsLib.getDocument(url);
           currentPDFDoc = await loadingTask.promise;
           
           // Update branch info
