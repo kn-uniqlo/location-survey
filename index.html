@@ -15,7 +15,7 @@
       pageNum = 1,
       pageRendering = false,
       pageNumPending = null,
-      scale = 0.8,
+      scale = 3.0,
       canvas = document.getElementById('the-canvas'),
       ctx = canvas.getContext('2d');
 
@@ -117,6 +117,8 @@
 
   <style>
     #the-canvas {
+      width: 100%;
+      height: auto;
       border: 1px solid black;
       direction: ltr;
     }
