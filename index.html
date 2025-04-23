@@ -20,6 +20,9 @@
       ctx = canvas.getContext('2d');
   var pagesRead = new Set();
   var readAllPages = false;
+  var pageStartTime = Date.now();
+  var minPageTime = 30000; // 30 seconds in milliseconds
+  var canChangePage = true;
   var startTime = Date.now();
 
   /**
@@ -28,6 +31,14 @@
    */
   function renderPage(num) {
     pageRendering = true;
+    // Reset page timer and lock navigation
+    pageStartTime = Date.now();
+    canChangePage = false;
+    setTimeout(() => {
+      canChangePage = true;
+      updateNavigationButtons();
+    }, minPageTime);
+
     // Using promise to fetch the page
     pdfDoc.getPage(num).then(function(page) {
       var viewport = page.getViewport({scale: scale});
@@ -76,6 +87,10 @@
    * Displays previous page.
    */
   function onPrevPage() {
+    if (!canChangePage) {
+      alert('Please view this page for at least 30 seconds before navigating.');
+      return;
+    }
     if (pageNum <= 1) {
       return;
     }
@@ -88,6 +103,10 @@
    * Displays next page.
    */
   function onNextPage() {
+    if (!canChangePage) {
+      alert('Please view this page for at least 30 seconds before navigating.');
+      return;
+    }
     if (pageNum >= pdfDoc.numPages) {
       return;
     }
@@ -138,6 +157,9 @@
       // Additional actions can be added here
     }
   });
+
+  // Update button states initially
+  updateNavigationButtons();
 </script>
 
 <body>
@@ -172,6 +194,10 @@
     #read-btn:disabled {
       background-color: #ccc;
       cursor: not-allowed;
+    }
+    button:disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
     }
   </style>
 </body>
