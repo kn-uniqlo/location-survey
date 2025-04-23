@@ -1,10 +1,14 @@
 [
   {
     "name": "1052 สาขา Central Chiang Rai",
-    "pdfUrl": "https://raw.githubusercontent.com/kn-uniqlo/location-survey/main/Location Inspection Survey_1052 Central Chiang Rai.pdf"
+    "id": "Location Inspection Survey_1052 Central Chiang Rai"
   },
   {
     "name": "1059 สาขา Roadside Nawamin",
-    "pdfUrl": "https://raw.githubusercontent.com/kn-uniqlo/location-survey/main/Location Inspection Survey_1059 Roadside Nawamin.pdf"
+    "id": "Location Inspection Survey_1059 Roadside Nawamin"
+  },
+  {
+    "name": "1061 สาขา Fashion Island",
+    "id": "Location Inspection Survey_1061 Fashion Island"
   }
 ]
