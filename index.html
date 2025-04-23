@@ -15,9 +15,12 @@
       pageNum = 1,
       pageRendering = false,
       pageNumPending = null,
-      scale = 3.0,
+      scale = 0.8,
       canvas = document.getElementById('the-canvas'),
       ctx = canvas.getContext('2d');
+  var pagesRead = new Set();
+  var readAllPages = false;
+  var startTime = Date.now();
 
   /**
    * Get page info from document, resize canvas accordingly, and render page.
@@ -47,6 +50,10 @@
           pageNumPending = null;
         }
       });
+
+      // Track read pages
+      pagesRead.add(num);
+      updateReadStatus();
     });
 
     // Update page counters
@@ -99,16 +106,46 @@
     // Initial/first page rendering
     renderPage(pageNum);
   });
+
+  function updateReadStatus() {
+    // Enable read button when all pages are read
+    if (pagesRead.size === pdfDoc.numPages && !readAllPages) {
+      readAllPages = true;
+      document.getElementById('read-btn').disabled = false;
+      alert('You have read all pages!');
+      saveReadingStats();
+    }
+    // Update page counter with read status
+    document.getElementById('page_num').innerHTML = 
+      `${pageNum} <span class="read-status">${pagesRead.has(pageNum) ? '✓' : ''}</span>`;
+  }
+
+  function saveReadingStats() {
+    const readingData = {
+      totalPages: pdfDoc.numPages,
+      readPages: pagesRead.size,
+      completionTime: Date.now() - startTime,
+      completedAt: new Date().toISOString()
+    };
+    // Here you can send the data to your server
+    console.log('Reading stats:', readingData);
+  }
+
+  // Add event listener for read button
+  document.getElementById('read-btn').addEventListener('click', function() {
+    if (readAllPages) {
+      alert('Thank you for reading the entire document!');
+      // Additional actions can be added here
+    }
+  });
 </script>
 
 <body>
-  <h1>PDF.js Previous/Next example</h1>
-
-  <p>Please use <a href="https://mozilla.github.io/pdf.js/getting_started/#download"><i>official releases</i></a> in production environments.</p>
-
+  <h1>PDF.js Reading Tracker</h1>
   <div>
     <button id="prev">Previous</button>
     <button id="next">Next</button>
+    <button id="read-btn" disabled>Mark as Read</button>
     &nbsp; &nbsp;
     <span>Page: <span id="page_num"></span> / <span id="page_count"></span></span>
   </div>
@@ -121,6 +158,20 @@
       height: auto;
       border: 1px solid black;
       direction: ltr;
+    }
+    .read-status {
+      color: green;
+      font-weight: bold;
+      margin-left: 5px;
+    }
+    #read-btn {
+      margin-left: 20px;
+      background-color: #4CAF50;
+      color: white;
+    }
+    #read-btn:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
     }
   </style>
 </body>
