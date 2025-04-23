@@ -10,12 +10,13 @@
 </head>
 <body>
 
-        <header>
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/UNIQLO_logo.svg/1200px-UNIQLO_logo.svg.png" alt="UNIQLO Logo" class="logo">
-          <h1>UNIQLO STORE LOCATION SURVEY</h1>
-          <div class="subtitle">ค้นหาข้อมูลรายละเอียดสาขาของ UNIQLO ในประเทศไทย</div>
-        </header>
-        
+    <header>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/UNIQLO_logo.svg/1200px-UNIQLO_logo.svg.png" alt="UNIQLO Logo" class="logo">
+      <h1>UNIQLO STORE LOCATION SURVEY</h1>
+      <div class="subtitle">ค้นหาข้อมูลรายละเอียดสาขาของ UNIQLO ในประเทศไทย</div>
+    </header>
+    
+        <div class="content">
           <div class="branch-selector">
             <h2 class="section-title">ค้นหาสาขาที่ต้องการ</h2>
             
@@ -39,27 +40,27 @@
                 </div>
               </div>
             </div>
-
+          </div>
         
-        <!-- PDF Controls -->
-        <div class="pdf-controls">
-            <div class="pdf-nav">
-                <button id="prev" class="pdf-btn">
-                    <i class="fas fa-chevron-left"></i> Previous
-                </button>
-                <button id="next" class="pdf-btn">
-                    Next <i class="fas fa-chevron-right"></i>
-                </button>
-            </div>
-            <div class="pdf-status">
-                <span>Page: <span id="page_num"></span> / <span id="page_count"></span></span>
-            </div>
-            <button id="read-btn" class="pdf-btn read-btn" disabled>
-                <i class="fas fa-check-circle"></i> Mark as Read
-            </button>
-        </div>
+          <!-- PDF Controls -->
+          <div class="pdf-controls">
+              <div class="pdf-nav">
+                  <button id="prev" class="pdf-btn">
+                      <i class="fas fa-chevron-left"></i> Previous
+                  </button>
+                  <button id="next" class="pdf-btn">
+                      Next <i class="fas fa-chevron-right"></i>
+                  </button>
+              </div>
+              <div class="pdf-status">
+                  <span>Page: <span id="page_num"></span> / <span id="page_count"></span></span>
+              </div>
+              <button id="read-btn" class="pdf-btn read-btn" disabled>
+                  <i class="fas fa-check-circle"></i> Mark as Read
+              </button>
+          </div>
           
-    <canvas id="the-canvas"></canvas>
+          <canvas id="the-canvas"></canvas>
 
           <div class="action-buttons">
             <button class="btn btn-primary" onclick="downloadPDF()" id="downloadBtn" disabled>
