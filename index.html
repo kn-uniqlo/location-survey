@@ -25,6 +25,52 @@
   var canChangePage = true;
   var startTime = Date.now();
 
+  let branchesData = null;
+
+  // Function to load branches data
+  async function loadBranches() {
+    const response = await fetch('Branches.json');
+    branchesData = await response.json();
+    populateSearch();
+  }
+
+  // Function to populate search suggestions
+  function populateSearch() {
+    const searchInput = document.getElementById('search');
+    const datalist = document.getElementById('branch-list');
+    
+    branchesData.forEach(branch => {
+      const option = document.createElement('option');
+      option.value = branch.name;
+      option.dataset.url = branch.pdfUrl;
+      datalist.appendChild(option);
+    });
+
+    searchInput.addEventListener('change', function() {
+      const selected = branchesData.find(b => b.name === this.value);
+      if (selected) {
+        url = selected.pdfUrl;
+        loadNewPdf();
+      }
+    });
+  }
+
+  // Function to load new PDF
+  function loadNewPdf() {
+    pdfjsLib.getDocument(url).promise.then(function(pdfDoc_) {
+      pdfDoc = pdfDoc_;
+      document.getElementById('page_count').textContent = pdfDoc.numPages;
+      pageNum = 1;
+      pagesRead.clear();
+      readAllPages = false;
+      document.getElementById('read-btn').disabled = true;
+      renderPage(pageNum);
+    });
+  }
+
+  // Load branches data when the page loads
+  loadBranches();
+
   /**
    * Get page info from document, resize canvas accordingly, and render page.
    * @param num Page number.
@@ -88,7 +134,7 @@
    */
   function onPrevPage() {
     if (!canChangePage) {
-      alert('Please view this page for at least 30 seconds before navigating.');
+      alert('Please view this page for at least 10 seconds before navigating.');
       return;
     }
     if (pageNum <= 1) {
@@ -104,7 +150,7 @@
    */
   function onNextPage() {
     if (!canChangePage) {
-      alert('Please view this page for at least 30 seconds before navigating.');
+      alert('Please view this page for at least 10 seconds before navigating.');
       return;
     }
     if (pageNum >= pdfDoc.numPages) {
@@ -164,6 +210,10 @@
 
 <body>
   <h1>Test PDF จับเวลาและล็อคปุ่มเปลี่ยนหน้าเป็นเวลา 10 วินาที</h1>
+  <div>
+    <input type="text" id="search" list="branch-list" placeholder="Search for a branch...">
+    <datalist id="branch-list"></datalist>
+  </div>
   <div>
     <button id="prev">Previous</button>
     <button id="next">Next</button>
