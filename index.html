@@ -43,22 +43,13 @@
           </div>
         
         <!-- PDF Controls -->
-        <div class="pdf-controls">
-            <div class="pdf-nav">
-                <button id="prev" class="pdf-btn">
-                    <i class="fas fa-chevron-left"></i> Previous
-                </button>
-                <button id="next" class="pdf-btn">
-                    Next <i class="fas fa-chevron-right"></i>
-                </button>
-            </div>
-            <div class="pdf-status">
-                <span>Page: <span id="page_num"></span> / <span id="page_count"></span></span>
-            </div>
-            <button id="read-btn" class="pdf-btn read-btn" disabled>
-                <i class="fas fa-check-circle"></i> Mark as Read
-            </button>
-        </div>
+          <div>
+            <button id="prev">Previous</button>
+            <button id="next">Next</button>
+            <button id="read-btn" disabled>Mark as Read</button>
+            &nbsp; &nbsp;
+            <span>Page: <span id="page_num"></span> / <span id="page_count"></span></span>
+          </div>
           
     <canvas id="the-canvas"></canvas>
 
