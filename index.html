@@ -162,18 +162,46 @@
         const searchInput = document.getElementById('branchSearch');
         const datalist = document.getElementById('branchList');
         
+        // Create an object to store branch info
+        const branchInfo = {};
+
         branchesData.forEach(branch => {
-        const option = document.createElement('option');
-        option.value = branch.name;
-        option.dataset.url = branch.pdfUrl;
-        datalist.appendChild(option);
+            const option = document.createElement('option');
+            option.value = branch.name;
+            option.dataset.id = branch.id;
+            datalist.appendChild(option);
+            
+            // Store branch info
+            branchInfo[branch.id] = {
+                name: branch.name,
+                address: branch.address,
+                hours: branch.hours || '10:00 - 22:00 น.',
+                phone: branch.phone || '02-XXX-XXXX',
+                transport: branch.transport || 'VIEW MAP',
+                mapLink: branch.mapLink
+            };
         });
-    
+
         searchInput.addEventListener('change', function() {
-        const selected = branchesData.find(b => b.name === this.value);
-        if (selected) {
-            loadNewPdf(selected.id);  // Use selected.id instead of pdfUrl
-        }
+            const selectedOption = datalist.querySelector(`option[value="${this.value}"]`);
+            if (selectedOption) {
+                const branchId = selectedOption.dataset.id;
+                const selectedBranch = branchInfo[branchId];
+                
+                // Update branch info display
+                document.getElementById('branchName').textContent = selectedBranch.name;
+                document.getElementById('branchAddress').textContent = selectedBranch.address;
+                document.getElementById('branchHours').textContent = selectedBranch.hours;
+                document.getElementById('branchPhone').textContent = selectedBranch.phone;
+                document.getElementById('branchTransport').textContent = selectedBranch.transport;
+                document.getElementById('mapLink').href = selectedBranch.mapLink;
+                
+                // Show the branch info section
+                document.getElementById('branchInfo').style.display = 'block';
+                
+                // Load the PDF
+                loadNewPdf(branchId);
+            }
         });
     }
     
