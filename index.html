@@ -3,7 +3,7 @@
 <script type="module">
   // If absolute URL from the remote server is provided, configure the CORS
   // header on that server.
-  var url = 'https://raw.githubusercontent.com/kn-uniqlo/location-survey/main/Location Inspection Survey_1052 Central Chiang Rai.pdf';
+  let url = '';
 
   // Loaded via <script> tag, create shortcut to access PDF.js exports.
   var { pdfjsLib } = globalThis;
@@ -49,14 +49,14 @@
     searchInput.addEventListener('change', function() {
       const selected = branchesData.find(b => b.name === this.value);
       if (selected) {
-        url = selected.pdfUrl;
-        loadNewPdf();
+        loadNewPdf(selected.id);  // Use selected.id instead of pdfUrl
       }
     });
   }
 
   // Function to load new PDF
-  function loadNewPdf() {
+  function loadNewPdf(id) {
+    url = `https://raw.githubusercontent.com/kn-uniqlo/location-survey/main/${id}.pdf`;
     pdfjsLib.getDocument(url).promise.then(function(pdfDoc_) {
       pdfDoc = pdfDoc_;
       document.getElementById('page_count').textContent = pdfDoc.numPages;
