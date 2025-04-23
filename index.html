@@ -21,7 +21,7 @@
   var pagesRead = new Set();
   var readAllPages = false;
   var pageStartTime = Date.now();
-  var minPageTime = 30000; // 30 seconds in milliseconds
+  var minPageTime = 10000; // 10 seconds in milliseconds
   var canChangePage = true;
   var startTime = Date.now();
 
@@ -163,7 +163,7 @@
 </script>
 
 <body>
-  <h1> Test PDF จับเวลาและล็อคปุ่มเปลี่ยนหน้าเป็นเวลา 30 วินาที </h1>
+  <h1>Test PDF จับเวลาและล็อคปุ่มเปลี่ยนหน้าเป็นเวลา 10 วินาที</h1>
   <div>
     <button id="prev">Previous</button>
     <button id="next">Next</button>
@@ -176,7 +176,8 @@
 
   <style>
     #the-canvas {
-      width: 100%;
+      position: center;
+      width: 70%;
       height: auto;
       border: 1px solid black;
       direction: ltr;
