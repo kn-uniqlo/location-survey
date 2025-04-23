@@ -40,7 +40,15 @@
         </div>
       </div>
       
-    <canvas id="the-canvas"></canvas>
+    <div>
+        <button id="prev">Previous</button>
+        <button id="next">Next</button>
+        <button id="read-btn" disabled>Mark as Read</button>
+        &nbsp; &nbsp;
+        <span>Page: <span id="page_num"></span> / <span id="page_count"></span></span>
+    </div>
+          
+<canvas id="the-canvas"></canvas>
       
       <div class="action-buttons">
         <button id="readBtn" class="btn btn-primary" disabled onclick="markAsRead()">
