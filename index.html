@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uniqlo Location Survey</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+
+    
+
+    <div class="container">
+        <header>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/UNIQLO_logo.svg/1200px-UNIQLO_logo.svg.png" alt="UNIQLO Logo" class="logo">
+          <h1>UNIQLO STORE LOCATION SURVEY</h1>
+          <div class="subtitle">ค้นหาข้อมูลรายละเอียดสาขาของ UNIQLO ในประเทศไทย</div>
+        </header>
+        
+        <div class="content">
+          <div class="branch-selector">
+            <h2 class="section-title">ค้นหาสาขาที่ต้องการ</h2>
+            
+            <div class="search-wrapper">
+              <input type="text" id="branchSearch" list="branchList" placeholder="พิมพ์ชื่อสาขา, ที่ตั้ง หรือศูนย์การค้า...">
+              <i class="search-icon fas fa-search"></i>
+              <datalist id="branchList"></datalist>
+            </div>
+            
+            <div id="branchInfo" class="branch-info">
+              <div class="branch-name"><i class="fas fa-store-alt"></i> <span id="branchName"></span></div>
+              <div class="branch-address"><i class="fas fa-map-marked-alt"></i> <span id="branchAddress"></span></div>
+              <div class="branch-meta">
+                <div class="meta-item"><i class="fas fa-clock"></i> <span id="branchHours"></span></div>
+                <div class="meta-item"><i class="fas fa-phone-alt"></i> <span id="branchPhone"></span></div>
+                <div class="meta-item">
+                  <a href="#" id="mapLink" target="_blank" class="map-link" aria-label="ดูแผนที่สาขา">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span id="branchTransport"></span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        
+        <!-- PDF Controls -->
+        <div class="pdf-controls">
+            <button id="prev">หน้าก่อนหน้า</button>
+            <button id="next">หน้าถัดไป</button>
+            <button id="read-btn" disabled>ทำเครื่องหมายว่าอ่านแล้ว</button>
+            <span class="page-counter">
+                หน้า: <span id="page_num"></span> / <span id="page_count"></span>
+            </span>
+        </div>
+          
+        <canvas id="the-canvas"></canvas>
+
+          <div class="action-buttons">
+            <button id="readBtn" class="btn btn-primary" disabled onclick="markAsRead()">
+            <i class="fas fa-check-circle"></i> อ่านแล้ว
+            </button>
+            <button class="btn btn-primary" onclick="downloadPDF()" id="downloadBtn" disabled>
+              <i class="fas fa-download"></i> ดาวน์โหลด PDF
+            </button>
+            <button class="btn btn-outline" onclick="viewInNewTab()" id="viewBtn" disabled>
+              <i class="fas fa-external-link-alt"></i> เปิดในแท็บใหม่
+            </button>
+            <button class="btn btn-outline" onclick="toggleAdminPanel()" id="adminBtn">
+              <i class="fas fa-chart-bar"></i> ดูสถิติเชิงลึก
+            </button>
+          </div>
+          
+          <div id="adminPanel" class="admin-panel">
+            <h3><i class="fas fa-chart-line"></i> สถิติการเข้าชมแบบเรียลไทม์</h3>
+            <div class="date-filter">
+              <label for="startDate"><i class="fas fa-calendar-day"></i> จากวันที่: </label>
+              <input type="date" id="startDate">
+              <label for="endDate"><i class="fas fa-calendar-day"></i> ถึงวันที่: </label>
+              <input type="date" id="endDate">
+              <button class="btn btn-primary" onclick="loadStats()">
+                <i class="fas fa-filter"></i> กรองข้อมูล
+              </button>
+            </div>
+            <div class="stats-summary">
+              <div class="summary-item">
+                <i class="fas fa-store"></i>
+                <span id="totalBranches">0</span> สาขา
+              </div>
+              <div class="summary-item">
+                <i class="fas fa-eye"></i>
+                <span id="totalViews">0</span> ครั้ง
+              </div>
+            </div>
+            <table class="stats-table">
+              <thead>
+                <tr>
+                  <th>วันที่</th>
+                  <th>สาขา</th>
+                  <th>จำนวนครั้ง</th>
+                </tr>
+              </thead>
+              <tbody id="statsBody">
+                <!-- ข้อมูลสถิติจะแสดงที่นี่ -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+        
+        <footer>
+          <p>© 2025 UNIQLO Thailand. All rights reserved.</p>
+          <p>ระบบ Location Survey สำหรับใช้ภายในบริษัทเท่านั้น</p>
+        </footer>
+      </div>
+      
+      <a href="#" class="floating-btn" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+        <span class="tooltip">กลับสู่ด้านบน</span>
+      </a>
+
+
+<script src="//mozilla.github.io/pdf.js/build/pdf.mjs" type="module"></script>
+<script type="module">
+    // If absolute URL from the remote server is provided, configure the CORS
+    // header on that server.
+    let url = '';
+    
+    // Loaded via <script> tag, create shortcut to access PDF.js exports.
+    var { pdfjsLib } = globalThis;
+    
+    // The workerSrc property shall be specified.
+    pdfjsLib.GlobalWorkerOptions.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.mjs';
+    
+    var pdfDoc = null,
+        pageNum = 1,
+        pageRendering = false,
+        pageNumPending = null,
+        scale = 4.0,
+        canvas = document.getElementById('the-canvas'),
+        ctx = canvas.getContext('2d');
+    var pagesRead = new Set();
+    var readAllPages = false;
+    var pageStartTime = Date.now();
+    var minPageTime = 10000; // 10 seconds in milliseconds
+    var canChangePage = true;
+    var startTime = Date.now();
+    
+    let branchesData = null;
+    
+    // Function to load branches data
+    async function loadBranches() {
+        const response = await fetch('branches.json');
+        branchesData = await response.json();
+        populateSearch();
+    }
+    
+    // Function to populate search suggestions
+    function populateSearch() {
+        const searchInput = document.getElementById('search');
+        const datalist = document.getElementById('branch-list');
+        
+        branchesData.forEach(branch => {
+        const option = document.createElement('option');
+        option.value = branch.name;
+        option.dataset.url = branch.pdfUrl;
+        datalist.appendChild(option);
+        });
+    
+        searchInput.addEventListener('change', function() {
+        const selected = branchesData.find(b => b.name === this.value);
+        if (selected) {
+            loadNewPdf(selected.id);  // Use selected.id instead of pdfUrl
+        }
+        });
+    }
+    
+    // Function to load new PDF
+    function loadNewPdf(id) {
+        url = `https://raw.githubusercontent.com/kn-uniqlo/location-survey/main/${id}.pdf`;
+        pdfjsLib.getDocument(url).promise.then(function(pdfDoc_) {
+        pdfDoc = pdfDoc_;
+        document.getElementById('page_count').textContent = pdfDoc.numPages;
+        pageNum = 1;
+        pagesRead.clear();
+        readAllPages = false;
+        document.getElementById('read-btn').disabled = true;
+        renderPage(pageNum);
+        });
+    }
+    
+    // Load branches data when the page loads
+    loadBranches();
+    
+    /**
+        * Get page info from document, resize canvas accordingly, and render page.
+        * @param num Page number.
+        */
+    function renderPage(num) {
+        pageRendering = true;
+        // Reset page timer and lock navigation
+        pageStartTime = Date.now();
+        canChangePage = false;
+        setTimeout(() => {
+        canChangePage = true;
+        updateNavigationButtons();
+        }, minPageTime);
+    
+        // Using promise to fetch the page
+        pdfDoc.getPage(num).then(function(page) {
+        var viewport = page.getViewport({scale: scale});
+        canvas.height = viewport.height;
+        canvas.width = viewport.width;
+    
+        // Render PDF page into canvas context
+        var renderContext = {
+            canvasContext: ctx,
+            viewport: viewport
+        };
+        var renderTask = page.render(renderContext);
+    
+        // Wait for rendering to finish
+        renderTask.promise.then(function() {
+            pageRendering = false;
+            if (pageNumPending !== null) {
+            // New page rendering is pending
+            renderPage(pageNumPending);
+            pageNumPending = null;
+            }
+        });
+    
+        // Track read pages
+        pagesRead.add(num);
+        updateReadStatus();
+        });
+    
+        // Update page counters
+        document.getElementById('page_num').textContent = num;
+    }
+    
+    /**
+        * If another page rendering in progress, waits until the rendering is
+        * finised. Otherwise, executes rendering immediately.
+        */
+    function queueRenderPage(num) {
+        if (pageRendering) {
+        pageNumPending = num;
+        } else {
+        renderPage(num);
+        }
+    }
+    
+    /**
+        * Displays previous page.
+        */
+    function onPrevPage() {
+        if (!canChangePage) {
+        alert('Please view this page for at least 10 seconds before navigating.');
+        return;
+        }
+        if (pageNum <= 1) {
+        return;
+        }
+        pageNum--;
+        queueRenderPage(pageNum);
+    }
+    document.getElementById('prev').addEventListener('click', onPrevPage);
+    
+    /**
+        * Displays next page.
+        */
+    function onNextPage() {
+        if (!canChangePage) {
+        alert('Please view this page for at least 10 seconds before navigating.');
+        return;
+        }
+        if (pageNum >= pdfDoc.numPages) {
+        return;
+        }
+        pageNum++;
+        queueRenderPage(pageNum);
+    }
+    document.getElementById('next').addEventListener('click', onNextPage);
+    
+    /**
+        * Asynchronously downloads PDF.
+        */
+    pdfjsLib.getDocument(url).promise.then(function(pdfDoc_) {
+        pdfDoc = pdfDoc_;
+        document.getElementById('page_count').textContent = pdfDoc.numPages;
+    
+        // Initial/first page rendering
+        renderPage(pageNum);
+    });
+    
+    function updateReadStatus() {
+        // Enable read button when all pages are read
+        if (pagesRead.size === pdfDoc.numPages && !readAllPages) {
+        readAllPages = true;
+        document.getElementById('read-btn').disabled = false;
+        alert('You have read all pages!');
+        saveReadingStats();
+        }
+        // Update page counter with read status
+        document.getElementById('page_num').innerHTML = 
+        `${pageNum} <span class="read-status">${pagesRead.has(pageNum) ? '✓' : ''}</span>`;
+    }
+    
+    function saveReadingStats() {
+        const readingData = {
+        totalPages: pdfDoc.numPages,
+        readPages: pagesRead.size,
+        completionTime: Date.now() - startTime,
+        completedAt: new Date().toISOString()
+        };
+        // Here you can send the data to your server
+        console.log('Reading stats:', readingData);
+    }
+    
+    // Add event listener for read button
+    document.getElementById('read-btn').addEventListener('click', function() {
+        if (readAllPages) {
+        alert('Thank you for reading the entire document!');
+        // Additional actions can be added here
+        }
+    });
+    
+    // Update button states initially
+    updateNavigationButtons();
+</script>
+</body>
+</html>
