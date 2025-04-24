@@ -218,7 +218,7 @@
         pdfjsLib.getDocument(url).promise.then(function(pdfDoc_) {
         pdfDoc = pdfDoc_;
         document.getElementById('page_count').textContent = pdfDoc.numPages;
-        pageNum = 3;
+        pageNum = 1;
         pagesRead.clear();
         readAllPages = false;
         document.getElementById('read-btn').disabled = true;
