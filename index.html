@@ -291,8 +291,11 @@
           * Displays previous page.
           */
       function onPrevPage() {
-        alert('Previous page navigation is disabled.');
-        return;
+        if (pageNum <= 1) {
+          return;
+        }
+        pageNum--;
+        queueRenderPage(pageNum);
       }
       document.getElementById('prev').addEventListener('click', onPrevPage);
       
