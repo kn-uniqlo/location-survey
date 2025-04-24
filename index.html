@@ -229,20 +229,33 @@
     // Load branches data when the page loads
     loadBranches();
 
-
     // Download PDF function
     function downloadPDF() {
-      if (currentPDFId) {
-        window.open(`https://raw.githubusercontent.com/kn-uniqlo/location-survey/main/${currentPDFId}.pdf`, '_blank');
+      if (!currentPDFId) {
+        const pdfUrl = `https://raw.githubusercontent.com/kn-uniqlo/location-survey/main/${currentPDFId}.pdf`;
+        window.open(pdfUrl, '_blank');
       }
     }
     
     // View in new tab function
     function viewInNewTab() {
-      if (currentPDFId) {
-        window.open(`https://raw.githubusercontent.com/kn-uniqlo/location-survey/main/${currentPDFId}.pdf`, '_blank');
+      if (!currentPDFId) {
+        const pdfUrl = `https://raw.githubusercontent.com/kn-uniqlo/location-survey/main/${currentPDFId}.pdf`;
+        window.open(pdfUrl, '_blank');
       }
     }
+
+    // Ensure buttons are enabled when PDF is loaded
+    function enablePDFButtons() {
+        document.getElementById('downloadBtn').disabled = false;
+        document.getElementById('viewBtn').disabled = false;
+    }
+
+    // Add event listeners
+    document.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('downloadBtn').addEventListener('click', downloadPDF);
+        document.getElementById('viewBtn').addEventListener('click', viewInNewTab);
+    });
     
     /**
         * Get page info from document, resize canvas accordingly, and render page.
