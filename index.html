@@ -229,7 +229,15 @@
     // Load branches data when the page loads
     loadBranches();
 
-        // View in new tab function
+
+    // Download PDF function
+    function downloadPDF() {
+      if (currentPDFId) {
+        window.open(`https://raw.githubusercontent.com/kn-uniqlo/location-survey/main/${currentPDFId}.pdf`, '_blank');
+      }
+    }
+    
+    // View in new tab function
     function viewInNewTab() {
       if (currentPDFId) {
         window.open(`https://raw.githubusercontent.com/kn-uniqlo/location-survey/main/${currentPDFId}.pdf`, '_blank');
@@ -247,7 +255,6 @@
         canChangePage = false;
         setTimeout(() => {
         canChangePage = true;
-        updateNavigationButtons();
         }, minPageTime);
     
         // Using promise to fetch the page
@@ -414,8 +421,6 @@
         }
     });
     
-    // Update button states initially
-    updateNavigationButtons();
 </script>
 </body>
 </html>
