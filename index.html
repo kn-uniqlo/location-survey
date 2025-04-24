@@ -132,7 +132,8 @@
       // If absolute URL from the remote server is provided, configure the CORS
       // header on that server.
       let url = '';
-      
+      let currentPDFId = null;
+    
       // Loaded via <script> tag, create shortcut to access PDF.js exports.
       var { pdfjsLib } = globalThis;
       
@@ -212,6 +213,7 @@
       
       // Function to load new PDF
       function loadNewPdf(id) {
+          currentPDFId = id;
           url = `https://raw.githubusercontent.com/kn-uniqlo/location-survey/main/${id}.pdf`;
           pdfjsLib.getDocument(url).promise.then(function(pdfDoc_) {
           pdfDoc = pdfDoc_;
