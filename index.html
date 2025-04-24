@@ -1,126 +1,129 @@
-  <!DOCTYPE html>
-  <html lang="th">
-  <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Uniqlo Location Survey</title>
-      <link rel="stylesheet" href="styles.css">
-      <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  </head>
-  <body>
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uniqlo Location Survey</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
+</head>
+<body>
 
-          <header>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/UNIQLO_logo.svg/1200px-UNIQLO_logo.svg.png" alt="UNIQLO Logo" class="logo">
-            <h1>UNIQLO STORE LOCATION SURVEY</h1>
-            <div class="subtitle">ค้นหาข้อมูลรายละเอียดสาขาของ UNIQLO ในประเทศไทย</div>
-          </header>
-          
-          <div class="content">
-            <div class="branch-selector">
-              <h2 class="section-title">ค้นหาสาขาที่ต้องการ</h2>
-              
-              <div class="search-wrapper">
-                <input type="text" id="branchSearch" list="branchList" placeholder="พิมพ์ชื่อสาขา, ที่ตั้ง หรือศูนย์การค้า...">
-                <i class="search-icon fas fa-search"></i>
-                <datalist id="branchList"></datalist>
-              </div>
-              
-              <div id="branchInfo" class="branch-info">
-                <div class="branch-name"><i class="fas fa-store-alt"></i> <span id="branchName"></span></div>
-                <div class="branch-address"><i class="fas fa-map-marked-alt"></i> <span id="branchAddress"></span></div>
-                <div class="branch-meta">
-                  <div class="meta-item"><i class="fas fa-clock"></i> <span id="branchHours"></span></div>
-                  <div class="meta-item"><i class="fas fa-phone-alt"></i> <span id="branchPhone"></span></div>
-                  <div class="meta-item">
-                    <a href="#" id="mapLink" target="_blank" class="map-link" aria-label="ดูแผนที่สาขา">
-                      <i class="fas fa-map-marker-alt"></i>
-                      <span id="branchTransport"></span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          
-            <!-- PDF Controls -->
-            <div class="pdf-controls">
-                <div class="pdf-nav">
-                    <button id="prev" class="pdf-btn">
-                        <i class="fas fa-chevron-left"></i> Previous
-                    </button>
-                    <button id="next" class="pdf-btn">
-                        Next <i class="fas fa-chevron-right"></i>
-                    </button>
-                </div>
-                <div class="pdf-status">
-                    <span>Page: <span id="page_num"></span> / <span id="page_count"></span></span>
-                </div>
-                <button id="read-btn" class="pdf-btn read-btn" disabled>
-                    <i class="fas fa-check-circle"></i> Mark as Read
-                </button>
+        <header>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/UNIQLO_logo.svg/1200px-UNIQLO_logo.svg.png" alt="UNIQLO Logo" class="logo">
+          <h1>UNIQLO STORE LOCATION SURVEY</h1>
+          <div class="subtitle">ค้นหาข้อมูลรายละเอียดสาขาของ UNIQLO ในประเทศไทย</div>
+        </header>
+        
+        <div class="content">
+          <div class="branch-selector">
+            <h2 class="section-title">ค้นหาสาขาที่ต้องการ</h2>
+            
+            <div class="search-wrapper">
+              <input type="text" id="branchSearch" list="branchList" placeholder="พิมพ์ชื่อสาขา, ที่ตั้ง หรือศูนย์การค้า...">
+              <i class="search-icon fas fa-search"></i>
+              <datalist id="branchList"></datalist>
             </div>
             
-            <canvas id="the-canvas"></canvas>
-
-            <div class="action-buttons">
-              <button class="btn btn-primary" onclick="downloadPDF()" id="downloadBtn" disabled>
-                <i class="fas fa-download"></i> ดาวน์โหลด PDF
-              </button>
-              <button class="btn btn-outline" onclick="viewInNewTab()" id="viewBtn" disabled>
-                <i class="fas fa-external-link-alt"></i> เปิดในแท็บใหม่
-              </button>
-              <button class="btn btn-outline" onclick="toggleAdminPanel()" id="adminBtn">
-                <i class="fas fa-chart-bar"></i> ดูสถิติเชิงลึก
-              </button>
-            </div>
-            
-            <div id="adminPanel" class="admin-panel">
-              <h3><i class="fas fa-chart-line"></i> สถิติการเข้าชมแบบเรียลไทม์</h3>
-              <div class="date-filter">
-                <label for="startDate"><i class="fas fa-calendar-day"></i> จากวันที่: </label>
-                <input type="date" id="startDate">
-                <label for="endDate"><i class="fas fa-calendar-day"></i> ถึงวันที่: </label>
-                <input type="date" id="endDate">
-                <button class="btn btn-primary" onclick="loadStats()">
-                  <i class="fas fa-filter"></i> กรองข้อมูล
-                </button>
-              </div>
-              <div class="stats-summary">
-                <div class="summary-item">
-                  <i class="fas fa-store"></i>
-                  <span id="totalBranches">0</span> สาขา
-                </div>
-                <div class="summary-item">
-                  <i class="fas fa-eye"></i>
-                  <span id="totalViews">0</span> ครั้ง
+            <div id="branchInfo" class="branch-info">
+              <div class="branch-name"><i class="fas fa-store-alt"></i> <span id="branchName"></span></div>
+              <div class="branch-address"><i class="fas fa-map-marked-alt"></i> <span id="branchAddress"></span></div>
+              <div class="branch-meta">
+                <div class="meta-item"><i class="fas fa-clock"></i> <span id="branchHours"></span></div>
+                <div class="meta-item"><i class="fas fa-phone-alt"></i> <span id="branchPhone"></span></div>
+                <div class="meta-item">
+                  <a href="#" id="mapLink" target="_blank" class="map-link" aria-label="ดูแผนที่สาขา">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span id="branchTransport"></span>
+                  </a>
                 </div>
               </div>
-              <table class="stats-table">
-                <thead>
-                  <tr>
-                    <th>วันที่</th>
-                    <th>สาขา</th>
-                    <th>จำนวนครั้ง</th>
-                  </tr>
-                </thead>
-                <tbody id="statsBody">
-                  <!-- ข้อมูลสถิติจะแสดงที่นี่ -->
-                </tbody>
-              </table>
             </div>
           </div>
-          
-      <footer>
-          <p>© 2025 UNIQLO Thailand. All rights reserved.</p>
-          <p>ระบบ Location Survey สำหรับใช้ภายในบริษัทเท่านั้น</p>
-      </footer>
-    
         
-    <a href="#" class="floating-btn" onclick="scrollToTop()">
-      <i class="fas fa-arrow-up"></i>
-      <span class="tooltip">กลับสู่ด้านบน</span>
-    </a>
-    
+          <!-- PDF Controls -->
+          <div class="pdf-controls">
+              <div class="pdf-nav">
+                  <button id="prev" class="pdf-btn">
+                      <i class="fas fa-chevron-left"></i> Previous
+                  </button>
+                  <button id="next" class="pdf-btn">
+                      Next <i class="fas fa-chevron-right"></i>
+                  </button>
+              </div>
+              <div class="pdf-status">
+                  <span>Page: <span id="page_num"></span> / <span id="page_count"></span></span>
+              </div>
+              <button id="read-btn" class="pdf-btn read-btn" disabled>
+                  <i class="fas fa-check-circle"></i> Mark as Read
+              </button>
+          </div>
+          
+          <canvas id="the-canvas"></canvas>
+
+          <div class="action-buttons">
+            <button class="btn btn-primary" onclick="downloadPDF()" id="downloadBtn" disabled>
+              <i class="fas fa-download"></i> ดาวน์โหลด PDF
+            </button>
+            <button class="btn btn-outline" onclick="viewInNewTab()" id="viewBtn" disabled>
+              <i class="fas fa-external-link-alt"></i> เปิดในแท็บใหม่
+            </button>
+            <button class="btn btn-outline" onclick="toggleAdminPanel()" id="adminBtn">
+              <i class="fas fa-chart-bar"></i> ดูสถิติเชิงลึก
+            </button>
+          </div>
+          
+          <div id="adminPanel" class="admin-panel">
+            <h3><i class="fas fa-chart-line"></i> สถิติการเข้าชมแบบเรียลไทม์</h3>
+            <div class="date-filter">
+              <label for="startDate"><i class="fas fa-calendar-day"></i> จากวันที่: </label>
+              <input type="date" id="startDate">
+              <label for="endDate"><i class="fas fa-calendar-day"></i> ถึงวันที่: </label>
+              <input type="date" id="endDate">
+              <button class="btn btn-primary" onclick="loadStats()">
+                <i class="fas fa-filter"></i> กรองข้อมูล
+              </button>
+            </div>
+            <div class="stats-summary">
+              <div class="summary-item">
+                <i class="fas fa-store"></i>
+                <span id="totalBranches">0</span> สาขา
+              </div>
+              <div class="summary-item">
+                <i class="fas fa-eye"></i>
+                <span id="totalViews">0</span> ครั้ง
+              </div>
+            </div>
+            <table class="stats-table">
+              <thead>
+                <tr>
+                  <th>วันที่</th>
+                  <th>สาขา</th>
+                  <th>จำนวนครั้ง</th>
+                </tr>
+              </thead>
+              <tbody id="statsBody">
+                <!-- ข้อมูลสถิติจะแสดงที่นี่ -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+        
+    <footer>
+        <p>© 2025 UNIQLO Thailand. All rights reserved.</p>
+        <p>ระบบ Location Survey สำหรับใช้ภายในบริษัทเท่านั้น</p>
+    </footer>
+  
+
+  <a href="#" class="floating-btn" onclick="scrollToTop()">
+    <i class="fas fa-arrow-up"></i>
+    <span class="tooltip">กลับสู่ด้านบน</span>
+  </a>
+  
 
   <!-- เพิ่ม Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
@@ -133,7 +136,7 @@
       // header on that server.
       let url = '';
       let currentPDFId = null;
-    
+      
       // Loaded via <script> tag, create shortcut to access PDF.js exports.
       var { pdfjsLib } = globalThis;
       
@@ -150,7 +153,7 @@
       var pagesRead = new Set();
       var readAllPages = false;
       var pageStartTime = Date.now();
-      var minPageTime = 5000; // 5 seconds in milliseconds
+      var minPageTime = 10000; // 10 seconds in milliseconds
       var canChangePage = true;
       var startTime = Date.now();
       
@@ -216,23 +219,26 @@
           currentPDFId = id;
           url = `https://raw.githubusercontent.com/kn-uniqlo/location-survey/main/${id}.pdf`;
           pdfjsLib.getDocument(url).promise.then(function(pdfDoc_) {
-          pdfDoc = pdfDoc_;
-          document.getElementById('page_count').textContent = pdfDoc.numPages > 2 ? pdfDoc.numPages - 2 : pdfDoc.numPages;
-          pageNum = 3;
-          pagesRead.clear();
-          readAllPages = false;
-          document.getElementById('read-btn').disabled = true;
-          renderPage(pageNum);
+              pdfDoc = pdfDoc_;
+              // Calculate total pages starting from page 3
+              const totalPages = Math.max(0, pdfDoc.numPages - 2); // Subtract 2 because we start at page 3
+              document.getElementById('page_count').textContent = totalPages;
+              pageNum = 3;  // Start from page 3
+              pagesRead.clear();
+              readAllPages = false;
+              document.getElementById('read-btn').disabled = true;
+              renderPage(pageNum);
           });
       }
       
-      // Load branches data when the page loads
-      loadBranches();
-      
-      /**
-          * Get page info from document, resize canvas accordingly, and render page.
-          * @param num Page number.
-          */
+      // Update page counters
+      function updatePageCounters(num) {
+          // Calculate displayed page number (starting from 1)
+          const displayedPageNum = num - 2;
+          document.getElementById('page_num').textContent = displayedPageNum;
+      }
+
+      // Modify renderPage function
       function renderPage(num) {
           pageRendering = true;
           // Reset page timer and lock navigation
@@ -272,7 +278,7 @@
           });
       
           // Update page counters
-          document.getElementById('page_num').textContent = num;
+          updatePageCounters(num);
       }
       
       /**
@@ -396,7 +402,7 @@
       // Add event listener for read button
       document.getElementById('read-btn').addEventListener('click', function() {
           if (readAllPages) {
-              const branchId = currentPDFId; // Assuming currentPDFId holds the current branch ID
+              const branchId = currentPDFId; 
               const branchName = document.getElementById('branchName').textContent;
               
               // Record the view in Firebase
