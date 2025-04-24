@@ -290,17 +290,6 @@
       /**
           * Displays previous page.
           */
-      function onPrevPage() {
-          if (!canChangePage) {
-          alert('Please view this page for at least 10 seconds before navigating.');
-          return;
-          }
-          if (pageNum <= 1) {
-          return;
-          }
-          pageNum--;
-          queueRenderPage(pageNum);
-      }
       document.getElementById('prev').addEventListener('click', onPrevPage);
       
       /**
