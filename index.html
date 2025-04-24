@@ -228,6 +228,13 @@
     
     // Load branches data when the page loads
     loadBranches();
+
+        // View in new tab function
+    function viewInNewTab() {
+      if (currentPDFId) {
+        window.open(`https://raw.githubusercontent.com/kn-uniqlo/location-survey/main/${id}.pdf`, '_blank');
+      }
+    }
     
     /**
         * Get page info from document, resize canvas accordingly, and render page.
