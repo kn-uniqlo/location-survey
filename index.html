@@ -128,7 +128,7 @@
 <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
 
 <script src="//mozilla.github.io/pdf.js/build/pdf.mjs" type="module"></script>
-<script>
+<script type="module">
     // If absolute URL from the remote server is provided, configure the CORS
     // header on that server.
     let url = '';
@@ -544,6 +544,10 @@
           floatingBtn.style.display = 'flex';
         } else {
           floatingBtn.style.display = 'none';
+        }
+        const adminBtn = document.getElementById('adminBtn');
+        if (adminBtn) {
+          adminBtn.addEventListener('click', toggleAdminPanel);
         }
       });
 
