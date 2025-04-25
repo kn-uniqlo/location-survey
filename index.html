@@ -81,7 +81,7 @@
               <input type="date" id="startDate">
               <label for="endDate"><i class="fas fa-calendar-day"></i> ถึงวันที่: </label>
               <input type="date" id="endDate">
-              <button class="btn btn-primary" onclick="loadStats()">
+              <button class="btn btn-primary" id="filterStatsBtn">
                 <i class="fas fa-filter"></i> กรองข้อมูล
               </button>
             </div>
@@ -548,6 +548,10 @@
         const adminBtn = document.getElementById('adminBtn');
         if (adminBtn) {
           adminBtn.addEventListener('click', toggleAdminPanel);
+        }
+        const filterStatsBtn = document.getElementById('filterStatsBtn')
+        if (filterStatsBtn) {
+          filterStatsBtn.addEventListener('click', loadStats());
         }
       });
 
