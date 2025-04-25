@@ -379,16 +379,16 @@
   
 
 
-      // Firebase configuration
-      const firebaseConfig = {
-        apiKey: "AIzaSyBdIb5BR91K6_SJWSGc8Y7Q3UwAttIZSOo",
-        authDomain: "recordreadbyuser.firebaseapp.com",
-        databaseURL: "https://recordreadbyuser-default-rtdb.firebaseio.com",
-        projectId: "recordreadbyuser",
-        storageBucket: "recordreadbyuser.firebasestorage.app",
-        messagingSenderId: "578950778208",
-        appId: "1:578950778208:web:0443ab287ddb12394fa205",
-        measurementId: "G-5VF81MTY4R"
+    // Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyBdIb5BR91K6_SJWSGc8Y7Q3UwAttIZSOo",
+      authDomain: "recordreadbyuser.firebaseapp.com",
+      databaseURL: "https://recordreadbyuser-default-rtdb.firebaseio.com",
+      projectId: "recordreadbyuser",
+      storageBucket: "recordreadbyuser.firebasestorage.app",
+      messagingSenderId: "578950778208",
+      appId: "1:578950778208:web:0443ab287ddb12394fa205",
+      measurementId: "G-5VF81MTY4R"
     };
 
     // Initialize Firebase
@@ -398,42 +398,168 @@
 
     // Function to record view statistics
     function recordView(branchId, branchName) {
-        const today = new Date().toISOString().split('T')[0];
-        const timestamp = firebase.database.ServerValue.TIMESTAMP;
-        
-        // Record detailed view data
-        const viewRef = database.ref(`views/${today}/${branchId}/logs`).push(); 
-        viewRef.set({
-            timestamp: timestamp,
-            userAgent: navigator.userAgent,
-            screenResolution: `${window.screen.width}x${window.screen.height}`,
-            language: navigator.language
-        });
-        
-        // Update total view count
-        const countRef = database.ref(`stats/${today}/${branchId}`);
-        countRef.transaction((currentCount) => {
-            return (currentCount || 0) + 1;
-        });
-        
-        // Update branch name (if not already set)
-        database.ref(`branchNames/${branchId}`).set(branchName);
+      const today = new Date().toISOString().split('T')[0];
+      const timestamp = firebase.database.ServerValue.TIMESTAMP;
+
+      // Record detailed view data
+      const viewRef = database.ref(`views/${today}/${branchId}/logs`).push();
+      viewRef.set({
+        timestamp: timestamp,
+        userAgent: navigator.userAgent,
+        screenResolution: `${window.screen.width}x${window.screen.height}`,
+        language: navigator.language
+      });
+
+      // Update total view count
+      const countRef = database.ref(`stats/${today}/${branchId}`);
+      countRef.transaction((currentCount) => {
+        return (currentCount || 0) + 1;
+      });
+
+      // Update branch name (if not already set)
+      database.ref(`branchNames/${branchId}`).set(branchName);
     }
 
     // Add event listener for read button
     document.getElementById('read-btn').addEventListener('click', function() {
-        if (readAllPages) {
-            const branchId = currentPDFId; // Assuming currentPDFId holds the current branch ID
-            const branchName = document.getElementById('branchName').textContent;
-            
-            // Record the view in Firebase
-            recordView(branchId, branchName);
-            
-            alert('Thank you for reading the entire document!');
-            // Additional actions can be added here
-        }
+      if (readAllPages) {
+        const branchId = currentPDFId; // Assuming currentPDFId holds the current branch ID
+        const branchName = document.getElementById('branchName').textContent;
+
+        // Record the view in Firebase
+        recordView(branchId, branchName);
+
+        alert('Thank you for reading the entire document!');
+        // Additional actions can be added here
+      }
     });
-    
+
+    // Toggle admin panel
+    function toggleAdminPanel() {
+      const panel = document.getElementById('adminPanel');
+      panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+
+      if (panel.style.display === 'block') {
+        loadStats();
+      }
+    }
+
+    // Load statistics from Firebase
+    async function loadStats() {
+      const startDate = document.getElementById('startDate').value;
+      const endDate = document.getElementById('endDate').value;
+
+      try {
+        // ตั้งค่าค่าเริ่มต้นหากไม่ได้เลือกวันที่
+        const today = new Date().toISOString().split('T')[0];
+        const queryStartDate = startDate || today;
+        const queryEndDate = endDate || today;
+
+        // ดึงข้อมูลสถิติ
+        const snapshot = await database.ref('stats').once('value');
+        const statsData = snapshot.val() || {};
+
+        // กรองข้อมูลตามวันที่
+        const filteredStats = {};
+        for (const date in statsData) {
+          if (date >= queryStartDate && date <= queryEndDate) {
+            filteredStats[date] = statsData[date];
+          }
+        }
+
+        // ประมวลผลและแสดงผล
+        displayStats(filteredStats);
+
+      } catch (error) {
+        console.error('Error loading stats:', error);
+        alert('เกิดข้อผิดพลาดในการโหลดสถิติ');
+      }
+    }
+
+    // แสดงสถิติในตาราง
+    function displayStats(statsData) {
+      const statsBody = document.getElementById('statsBody');
+      statsBody.innerHTML = '';
+
+      let totalViews = 0;
+      const branchSet = new Set();
+
+      // เรียงลำดับวันที่จากใหม่ไปเก่า
+      const sortedDates = Object.keys(statsData).sort().reverse();
+
+      sortedDates.forEach(date => {
+        const branches = statsData[date];
+
+        for (const branchId in branches) {
+          const viewCount = branches[branchId];
+          totalViews += viewCount;
+          branchSet.add(branchId);
+
+          // สร้างแถวในตาราง
+          const row = document.createElement('tr');
+
+          const dateCell = document.createElement('td');
+          dateCell.textContent = formatDate(date);
+
+          const branchCell = document.createElement('td');
+          // ดึงชื่อสาขาจาก branchInfo หรือจาก Firebase ถ้าไม่มี
+          const branchName = branchInfo[branchId]?.name || branchId;
+          branchCell.textContent = branchName;
+
+          const countCell = document.createElement('td');
+          countCell.textContent = viewCount;
+
+          row.appendChild(dateCell);
+          row.appendChild(branchCell);
+          row.appendChild(countCell);
+          statsBody.appendChild(row);
+        }
+      });
+
+      // อัปเดตตัวเลขสรุป
+      document.getElementById('totalViews').textContent = totalViews;
+      document.getElementById('totalBranches').textContent = branchSet.size;
+    }
+
+    // จัดรูปแบบวันที่
+    function formatDate(dateString) {
+      const [year, month, day] = dateString.split('-');
+      return `${day}/${month}/${year}`;
+    }
+
+    // Initialize when page loads
+    document.addEventListener('DOMContentLoaded', async () => {
+      // ตั้งค่าวันที่เริ่มต้นและสิ้นสุดในฟิลเตอร์
+      const today = new Date().toISOString().split('T')[0];
+      document.getElementById('startDate').value = today;
+      document.getElementById('endDate').value = today;
+
+      // Load branches data
+      await loadBranches();
+
+      // Show scroll to top button when scrolling down
+      window.addEventListener('scroll', function() {
+        const floatingBtn = document.querySelector('.floating-btn');
+        if (window.pageYOffset > 300) {
+          floatingBtn.style.display = 'flex';
+        } else {
+          floatingBtn.style.display = 'none';
+        }
+      });
+
+      // Finish container animation
+      setTimeout(() => {
+        document.querySelector('.container').style.top = '0';
+      }, 100);
+
+      // ล็อกอินแบบไม่ระบุตัวตน (เพื่อใช้ Firebase Authentication)
+      try {
+        await auth.signInAnonymously();
+        console.log('Anonymous login successful');
+      } catch (error) {
+        console.error('Anonymous login failed:', error);
+      }
+    });
 </script>
 </body>
 </html>
