@@ -1,124 +1,312 @@
 [
   {
-    "id": "Location Inspection Survey_1052 Central Chiang Rai",
-    "name": "1052 สาขา Central Chiang Rai",
-    "address": "123/4 ถนนบรรพปราการ ตำบลเวียง อำเภอเมืองเชียงราย เชียงราย 57000",
+    "id": "1001",
+    "name": "สาขา Central World",
+    "address": "เซ็นทรัลเวิล์ด ชั้น 3 ถนนราชดำริ แขวงปทุมวัน",
     "hours": "10:00 - 22:00 น.",
-    "phone": "02-123-4567",
+    "dolly": "19:00 - 20:00",
+    "phone": "02-613-1465",
     "transport": "VIEW MAP",
-    "mapLink": "https://maps.google.com/?q=Central+Chiang+Rai"
+    "mapLink": "https://maps.google.com/?q=Central+World"
   },
   {
-    "id": "Location Inspection Survey_1058 Samyan Mitrtown",
-    "name": "1058 สาขา Samyan Mitrtown",
-    "address": "944 ถนนพระรามที่ 4 แขวงวังใหม่ เขตปทุมวัน กรุงเทพฯ 10330",
+    "id": "1002",
+    "name": "สาขา Central Plaza Lardprao",
+    "address": "เซ็นทรัลพลาซ่าลาดพร้าว เลขที่ 1693 ถนนพหลโยธิน แขวงจตุจักร เขตจตุจักร กรุงเทพมหานคร 10900",
     "hours": "10:00 - 22:00 น.",
-    "phone": "02-123-4567",
+    "dolly": "19:00 - 20:00",
+    "phone": "02-986-7358",
+    "transport": "VIEW MAP",
+    "mapLink": "https://maps.google.com/?q=Central+Plaza+Lardprao"
+  },
+  {
+    "id": "1005",
+    "name": "สาขา Siam Paragon",
+    "address": "สยามพารากอน ชั้น 1 เลขที่ 991 แขวงปทุมวัน เขตปทุมวัน กรุงเทพมหานคร 10330",
+    "hours": "10:00 - 22:00 น.",
+    "dolly": "19:00 - 20:00",
+    "phone": "02-610-7787",
+    "transport": "VIEW MAP",
+    "mapLink": "https://maps.google.com/?q=Siam+Paragon"
+  },
+  {
+    "id": "1008",
+    "name": "สาขา CF Pattaya Beach",
+    "address": "เซ็นทรัลเฟสติวัล พัทยาบีช ชั้น 1 ทางเข้า 9 333/102 ถนน พัทยาสายสอง อำเภอบางละมุง 20260",
+    "hours": "10:00 - 22:00 น.",
+    "dolly": "19:00 - 20:00",
+    "phone": "038-043-144",
+    "transport": "VIEW MAP",
+    "mapLink": "https://maps.google.com/?q=CF+Pattaya+Beach"
+  },
+  {
+    "id": "1015",
+    "name": "สาขา CF Hatyai",
+    "address": "เซ็นทรัลเฟสติวัลหาดใหญ่ ชั้น1 เลขที่ 1518 ถนนกาญจนาวนิช ตำบลหาดใหญ่ อำเภอหาดใหญ่ จังหวัดสงขลา 90110",
+    "hours": "10:00 - 22:00 น.",
+    "dolly": "19:00 - 20:00",
+    "phone": "074-339-625",
+    "transport": "VIEW MAP",
+    "mapLink": "https://maps.google.com/?q=CF+Hatyai"
+  },
+  {
+    "id": "1020",
+    "name": "สาขา Central Salaya",
+    "address": "เซ็นทรัลพลาซ่าศาลายา ชั้น 1 ห้อง 109 ตำบลบางเตย อำเภอสามพราน จังหวัดนครปฐม 73210",
+    "hours": "10:00 - 22:00 น.",
+    "dolly": "19:00 - 20:00",
+    "phone": "034-107-700",
+    "transport": "VIEW MAP",
+    "mapLink": "https://maps.google.com/?q=Central+Salaya"
+  },
+  {
+    "id": "1023",
+    "name": "สาขา Central Udonthani",
+    "address": "เซ็นทรัลพลาซ่าอุดรธานี 277/1-3 ถนน ประจักษ์ศิลปาคม อำเภอเมืองอุดรธานี จังหวัดอุดรธานี 41000",
+    "hours": "10:00 - 22:00 น.",
+    "dolly": "19:00 - 20:00",
+    "phone": "042-113-173",
+    "transport": "VIEW MAP",
+    "mapLink": "https://maps.google.com/?q=Central+Udonthani"
+  },
+  {
+    "id": "1024",
+    "name": "สาขา Central Rayong",
+    "address": "เซ็นทรัลพลาซ่าระยอง ชั้น 1 เลขที่ 113 ตำบลเชิงเนิน อำเภอเมือง จังหวัดระยอง 21000",
+    "hours": "10:00 - 22:00 น.",
+    "dolly": "19:00 - 20:00",
+    "phone": "033-013-011",
+    "transport": "VIEW MAP",
+    "mapLink": "https://maps.google.com/?q=Central+Rayong"
+  },
+  {
+    "id": "1026",
+    "name": "สาขา Central Khonkaen",
+    "address": "เซ็นทรัลพลาซ่าขอนแก่น ชั้น 1 99 99/1 ถนนศรีจันทร์ ตำบลในเมือง อำเภอเมืองขอนแก่น จังหวัดขอนแก่น 40000",
+    "hours": "10:00 - 22:00 น.",
+    "dolly": "19:00 - 20:00",
+    "phone": "043-288-416",
+    "transport": "VIEW MAP",
+    "mapLink": "https://maps.google.com/?q=Central+Khonkaen"
+  },
+  {
+    "id": "1031",
+    "name": "สาขา Central Plaza Rama 3",
+    "address": "เซ็นทรัลพลาซ่าพระราม3 เลขที่ 79 ถนนสาธุประดิษฐ์ แขวงช่องนนทรี เขตยานนาวา กรุงเทพมหานคร 10120",
+    "hours": "10:00 - 22:00 น.",
+    "dolly": "19:00 - 20:00",
+    "phone": "02-673-5714",
+    "transport": "VIEW MAP",
+    "mapLink": "https://maps.google.com/?q=Central+Plaza+Rama+3"
+  },
+  {
+    "id": "1032",
+    "name": "สาขา The Mall Ngamwongwan",
+    "address": "เดอะมอลล์งามวงศ์วาน 30/39-50 หมู่ 2 เขตบางเขน นนทบุรี 11000",
+    "hours": "10:00 - 22:00 น.",
+    "dolly": "19:00 - 20:00",
+    "phone": "02-550-0847",
+    "transport": "VIEW MAP",
+    "mapLink": "https://maps.google.com/?q=The+Mall+Ngamwongwan"
+  },
+  {
+    "id": "1034",
+    "name": "สาขา The Mall Korat",
+    "address": "เดอะมอลล์ โครราช 1242/2 ถนนมิตรภาพ อำเภอเมือง จังหวัดนครราชสีมา 30000",
+    "hours": "10:00 - 22:00 น.",
+    "dolly": "19:00 - 20:00",
+    "phone": "044-390-491",
+    "transport": "VIEW MAP",
+    "mapLink": "https://maps.google.com/?q=The+Mall+Korat"
+  },
+  {
+    "id": "1039",
+    "name": "สาขา Central Plaza Nakhon Ratchasima",
+    "address": "เซ็นทรัลพลาซ่านครราชสีมา ตำบลในเมือง อำเภอเมือง จังหวัดนครราชสีมา 30000",
+    "hours": "10:00 - 22:00 น.",
+    "dolly": "19:00 - 20:00",
+    "phone": "044-003-710",
+    "transport": "VIEW MAP",
+    "mapLink": "https://maps.google.com/?q=Central+Plaza+Nakhon+Ratchasima"
+  },
+  {
+    "id": "1040",
+    "name": "สาขา Phatthanakan",
+    "address": "พัฒนาการ แขวงสวนหลวง เขตสวนหลวง กรุงเทพมหานคร 10250",
+    "hours": "10:00 - 22:00 น.",
+    "dolly": "15:00 - 17:00",
+    "phone": "02-029-0085",
+    "transport": "VIEW MAP",
+    "mapLink": "https://maps.google.com/?q=Phatthanakan"
+  },
+  {
+    "id": "1047",
+    "name": "สาขา Lasalle's Avenue",
+    "address": "ลาซาล อเวนิว เลขที่ 549 ถนนลาซาล-แบริ่ง แขวงบางนาใต้ เขตบางนา กรุงเทพมหานคร 10260",
+    "hours": "10:00 - 22:00 น.",
+    "dolly": "15:00 - 17:00",
+    "phone": "02-029-7937",
+    "transport": "VIEW MAP",
+    "mapLink": "https://maps.google.com/?q=Lasalle's+Avenue"
+  },
+  {
+    "id": "1049",
+    "name": "สาขา Terminal 21 Pattaya",
+    "address": "เทอร์มินอล21 พัทยา ชั้น M แคชเชียร์ 456.777-777/1 หมู่6 ถนนพัทยาเหนือ เมืองพัทยา อำเภอบางละมุง ชุมชนชลบุรี",
+    "hours": "10:00 - 22:00 น.",
+    "dolly": "19:00 - 20:00",
+    "phone": "033-045-182",
+    "transport": "VIEW MAP",
+    "mapLink": "https://maps.google.com/?q=Terminal+21+Pattaya"
+  },
+  {
+    "id": "1052",
+    "name": "สาขา Central Plaza Chiangrai",
+    "address": "เซ็นทรัลพลาซ่าเชียงราย ห้อง 119-123 หมู่ที่ 13 99/9 ถนน พหลโยธิน ตำบลรอบเวียง อำเภอเมืองเชียงราย จังหวัดเชียงราย 57000",
+    "hours": "10:00 - 22:00 น.",
+    "dolly": "19:00 - 20:00",
+    "phone": "052-024-180",
+    "transport": "VIEW MAP",
+    "mapLink": "https://maps.google.com/?q=Central+Plaza+Chiangrai"
+  },
+  {
+    "id": "1058",
+    "name": "สาขา Samyan Mitrtown",
+    "address": "สามย่านมิตรทาวน์ ชั้น 1 เลขที่ 944 ถนนพระราม 4 แขวงวังใหม่ เขตประทุมวัน กรุงเทพฯ 10330",
+    "hours": "10:00 - 22:00 น.",
+    "dolly": "19:00 - 20:00",
+    "phone": "02-029-0486",
     "transport": "VIEW MAP",
     "mapLink": "https://maps.google.com/?q=Samyan+Mitrtown"
   },
   {
-    "id": "Location Inspection Survey_1059 Roadside Nawamin",
-    "name": "1059 สาขา Roadside Nawamin",
-    "address": "234 ถนนนวมินทร์ แขวงนวมินทร์ เขตบึงกุ่ม กรุงเทพฯ 10240",
+    "id": "1059",
+    "name": "สาขา Nawamin",
+    "address": "นวมินทร์ เลขที่ 1108/3 ถนนนวมินทร์ แขวงคลองกุ่ม เขตบึงกุ่ม กรุงเทพมหานคร 10240",
     "hours": "10:00 - 22:00 น.",
-    "phone": "02-123-4567",
-    "transport": "รถโดยสารสาธารณะสาย 44, 524"
+    "dolly": "15:00 - 15:30",
+    "phone": "02-481-9930",
+    "transport": "VIEW MAP",
+    "mapLink": "https://maps.google.com/?q=Nawamin"
   },
   {
-    "id": "1VWQ9TClQvDUFa0peUoSjDAKSKrwbV4E2",
-    "name": "1060 สาขา Central Chonburi",
-    "address": "789 ถนนสุขุมวิท ตำบลบางปลาสร้อย อำเภอเมืองชลบุรี ชลบุรี 20000",
+    "id": "1060",
+    "name": "สาขา Central Plaza Chonburi",
+    "address": "เซ็นทรัลพลาซ่าชลบุรี เลขที่ 55/88-89 หมู่ 1 ถนนสุขุมวิท ตำบลเสม็ด อำเภอเมืองชลบุรี 20000",
     "hours": "10:00 - 22:00 น.",
-    "phone": "02-123-4567",
-    "transport": "รถสองแถวสายพัทยา-ชลบุรี"
+    "dolly": "19:00 - 20:00",
+    "phone": "033-140-389",
+    "transport": "VIEW MAP",
+    "mapLink": "https://maps.google.com/?q=Central+Plaza+Chonburi"
   },
   {
-    "id": "1rjEMWZnrVuAxDvmomuheBIV5eptHwd3K",
-    "name": "1061 สาขา Fashion Island",
-    "address": "456 ถนนคันนายาว แขวงคันนายาว เขตคันนายาว กรุงเทพฯ 10230",
+    "id": "1061",
+    "name": "สาขา Fashion Island",
+    "address": "แฟชั่น ไอซ์แลนด์ เลขที่ 587, 589 , 589/7-9 ถนนรามอินทรา แขวงคันนายาว เขตคันนายาว กรุงเทพมหานคร 10230",
     "hours": "10:00 - 22:00 น.",
-    "phone": "02-123-4567",
-    "transport": "รถโดยสารสาธารณะสาย 26, 27, 28"
+    "dolly": "19:00 - 20:00",
+    "phone": "02-947-5464",
+    "transport": "VIEW MAP",
+    "mapLink": "https://maps.google.com/?q=Fashion+Island"
   },
   {
-    "id": "1t7XX1L1Qteut9ptuZE0PCZMHTYZJlEbK",
-    "name": "1063 สาขา Central Plaza Sriracha",
-    "address": "999/9 ถนนสุขุมวิท ตำบลศรีราชา อำเภอศรีราชา ชลบุรี 20110",
+    "id": "1063",
+    "name": "สาขา Central Plaza Siracha",
+    "address": "เซ็นทรัลพลาซ่าศรีราชา เลขที่ 8 ถนนสุขุมวิท ตำบลศรีราชา อำเภอศรีราชา ตำบลชลบุรี 20110",
     "hours": "10:00 - 22:00 น.",
-    "phone": "02-123-4567",
-    "transport": "รถสองแถวสายศรีราชา-บางพระ"
+    "dolly": "19:00 - 20:00",
+    "phone": "038-312-146",
+    "transport": "VIEW MAP",
+    "mapLink": "https://maps.google.com/?q=Central+Plaza+Siracha"
   },
   {
-    "id": "1SQZb8BlS_lEJDq4VFSHzKz7wHy0mGgEa",
-    "name": "1065 สาขา The Mall Thaphra",
-    "address": "321 ถนนเจริญนคร แขวงบางลำภูล่าง เขตคลองสาน กรุงเทพฯ 10600",
+    "id": "1065",
+    "name": "สาขา The Mall Thapra",
+    "address": "เดอะมอลล์ท่าพระ ชั้น G 129 ถนนรัชดาภิเษก แขวงบุคคโล เขตธนบุรี กรุงเทพมหานคร 10600",
     "hours": "10:00 - 22:00 น.",
-    "phone": "02-123-4567",
-    "transport": "BTS สถานีวงเวียนใหญ่"
+    "dolly": "19:00 - 20:00",
+    "phone": "02-080-9440",
+    "transport": "VIEW MAP",
+    "mapLink": "https://maps.google.com/?q=The+Mall+Thapra"
   },
   {
-    "id": "1aqrYmjnZMou6n6XtTHYOdARk5apdMZww",
-    "name": "1067 สาขา Central Ubon Ratchathani",
-    "address": "555 ถนนชยางกูร ตำบลในเมือง อำเภอเมืองอุบลราชธานี อุบลราชธานี 34000",
+    "id": "1067",
+    "name": "สาขา Central Ubon Ratchathani",
+    "address": "เซ็นทรัลอุบลราชธานี ชั้น 1 311 หมู่ 7 ถนนเลี่ยงเมืองอุบลราชธานี ตำบลแจระแม อำเภอเมือง จังหวัดอุบลราชธานี 34000",
     "hours": "10:00 - 22:00 น.",
-    "phone": "02-123-4567",
-    "transport": "รถโดยสารสาธารณะในเมืองอุบลราชธานี"
+    "dolly": "19:00 - 20:00",
+    "phone": "045-951-558",
+    "transport": "VIEW MAP",
+    "mapLink": "https://maps.google.com/?q=Central+Ubon+Ratchathani"
   },
   {
-    "id": "1JGgw4fvOvT2dt_L6PioJ5ORzc-vKAevL",
-    "name": "1068 สาขา Robinson Chachoengsao",
-    "address": "222 ถนนศรีโสธร ตำบลบางปลากด อำเภอเมืองฉะเชิงเทรา ฉะเชิงเทรา 24000",
+    "id": "1068",
+    "name": "สาขา Robinson Chachoengsao",
+    "address": "โรบินสันฉะเชิงเทรา ชั้น 1 เลขที่ 910 หมู่ที่ 4 ถนนบางปะกง-ฉะเชิงเทรา ตำบลโสธร อำเภอเมือง จังหวัดฉะเชิงเทรา 24000",
     "hours": "10:00 - 22:00 น.",
-    "phone": "02-123-4567",
-    "transport": "รถสองแถวสายฉะเชิงเทรา-บางปะกง"
+    "dolly": "19:00 - 20:00",
+    "phone": "033-051-193",
+    "transport": "VIEW MAP",
+    "mapLink": "https://maps.google.com/?q=Robinson+Chachoengsao"
   },
   {
-    "id": "1nE47EJqabg-DQow7g8UVOZk7x1XH6SVr",
-    "name": "1069 สาขา Robinson Kanchanaburi",
-    "address": "333 ถนนแสงชูโต ตำบลปากแพรก อำเภอเมืองกาญจนบุรี กาญจนบุรี 71000",
+    "id": "1069",
+    "name": "สาขา Robinson Kanchanaburi",
+    "address": "โรบินสันกาญจนบุรีชั้น 1 เลขที่ 110 หมู่ 9 ถนนเลี่ยงเมืองกาญจนบุรี ตำบลปากแพรก อำเภอเมือง จังหวัดกาญจนบุรี 71000",
     "hours": "10:00 - 22:00 น.",
-    "phone": "02-123-4567",
-    "transport": "รถโดยสารสาธารณะในเมืองกาญจนบุรี"
+    "dolly": "19:00 - 20:00",
+    "phone": "034-914-062",
+    "transport": "VIEW MAP",
+    "mapLink": "https://maps.google.com/?q=Robinson+Kanchanaburi"
   },
   {
-    "id": "1ZTBkdgm642tqCzIoIwgaJFek2C-irhX9",
-    "name": "1070 สาขา Robinson Buriram",
-    "address": "444 ถนนนิวาส ตำบลในเมือง อำเภอเมืองบุรีรัมย์ บุรีรัมย์ 31000",
+    "id": "1070",
+    "name": "สาขา Robinson Buriram",
+    "address": "โรบินสันบุรีรัมย์ ชั้น 1 เลขที่ 125 หมู่ 6 ถนนบุรีรัมย์- นางรอง ตำบลอิสาณ อำเภอเมืองบุรีรัมย์ จังหวัดบุรีรัมย์ 31000",
     "hours": "10:00 - 22:00 น.",
-    "phone": "02-123-4567",
-    "transport": "รถโดยสารสาธารณะในเมืองบุรีรัมย์"
+    "dolly": "19:00 - 20:00",
+    "phone": "044-115-064",
+    "transport": "VIEW MAP",
+    "mapLink": "https://maps.google.com/?q=Robinson+Buriram"
   },
   {
-    "id": "1laNki1Vz-4wlwE2ptdm6VDoc7mw0XyuA",
-    "name": "1071 สาขา Terminal 21 Rama 3",
-    "address": "888 ถนนพระรามที่ 3 แขวงบางโพงพาง เขตยานนาวา กรุงเทพฯ 10120",
+    "id": "1071",
+    "name": "สาขา Terminal Rama3",
+    "address": "เทอร์มินอลพระราม 3 ถนนพระราม 3 เขตบางโคล่ แขวงบางคอแหลม กรุงเทพมหานคร 10120",
     "hours": "10:00 - 22:00 น.",
-    "phone": "02-123-4567",
-    "transport": "BTS สถานีวงเวียนใหญ่ แล้วต่อรถโดยสาร"
+    "dolly": "19:00 - 20:00",
+    "phone": "02-0301-438",
+    "transport": "VIEW MAP",
+    "mapLink": "https://maps.google.com/?q=Terminal+Rama3"
   },
   {
-    "id": "10PA3ZiyXm8gtXOYjS-FQPBxVvOknmABI",
-    "name": "1072 สาขา Roadside Lat Krabang",
-    "address": "777 ถนนลาดกระบัง แขวงลาดกระบัง เขตลาดกระบัง กรุงเทพฯ 10520",
+    "id": "1072",
+    "name": "สาขา Roadside Lat-Krabang",
+    "address": "ลาดกระบัง 72 ถนนลาดกระบัง แขวงลาดกระบัง เขตลาดกระบัง กรุงเทพมหานคร 10520",
     "hours": "10:00 - 22:00 น.",
-    "phone": "02-123-4567",
-    "transport": "รถโดยสารสาธารณะสาย 25, 40, 340"
+    "dolly": "15:00 - 17:00",
+    "phone": "02-483-6294",
+    "transport": "VIEW MAP",
+    "mapLink": "https://maps.google.com/?q=Roadside+Lat-Krabang"
   },
   {
-    "id": "1yyrtq12cY9tkwgdePjIVnBD2ru7K0f2B",
-    "name": "1073 สาขา Central Plaza Ram-Indra",
-    "address": "666 ถนนรามอินทรา แขวงคันนายาว เขตคันนายาว กรุงเทพฯ 10230",
+    "id": "1073",
+    "name": "สาขา Central Ramindra",
+    "address": "เซ็นทรัลพลาซ่า รามอินทรา ชั้น 1 หมู่ 3 ถนนรามอินทรา แขวงอนุสาวรีย์เขตบางเขน กรุงเทพมหานคร 10220",
     "hours": "10:00 - 22:00 น.",
-    "phone": "02-123-4567",
-    "transport": "รถโดยสารสาธารณะสาย 92, 134, 187"
+    "dolly": "19:00 - 20:00",
+    "phone": "02-030-1934",
+    "transport": "VIEW MAP",
+    "mapLink": "https://maps.google.com/?q=Central+Ramindra"
   },
   {
-    "id": "1GdMEvgOpWg5coOOXGK7d4hFM3I9BrGTt",
-    "name": "1074 สาขา Roadside Khonkaen",
-    "address": "111 ถนนศรีจันทร์ ตำบลในเมือง อำเภอเมืองขอนแก่น ขอนแก่น 40000",
+    "id": "1074",
+    "name": "สาขา Roadside Khonkaen",
+    "address": "ขอนแก่น ตลาดอู้ฟู่ หมู่ที่ 8 ถนนมิตรภาพ อำเภอเมืองขอนแก่น จังหวัดขอนแก่น รหัสไปรษณีย์ 40000",
     "hours": "10:00 - 22:00 น.",
-    "phone": "02-123-4567",
-    "transport": "รถโดยสารสาธารณะในเมืองขอนแก่น"
+    "dolly": "15:00 - 17:00",
+    "phone": "043-002-595",
+    "transport": "VIEW MAP",
+    "mapLink": "https://maps.google.com/?q=Roadside+Khonkaen"
   }
 ]
