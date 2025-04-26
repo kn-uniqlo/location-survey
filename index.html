@@ -174,7 +174,7 @@
         branchesData.forEach(branch => {
             const option = document.createElement('option');
             option.value = branch.name;
-            option.dataset.id = branch.id;
+            option.setAttribute('data-id', branch.id);
             datalist.appendChild(option);
             
             // Store branch info
@@ -214,7 +214,7 @@
     // Function to load new PDF
     function loadNewPdf(id) {
         currentPDFId = id;
-        url = `https://raw.githubusercontent.com/kn-uniqlo/location-survey/main/${id}.pdf`;
+        url = `https://raw.githubusercontent.com/kn-uniqlo/location-survey/main/pdfs/${id}.pdf`;
         pdfjsLib.getDocument(url).promise.then(function(pdfDoc_) {
         pdfDoc = pdfDoc_;
         document.getElementById('page_count').textContent = pdfDoc.numPages;
