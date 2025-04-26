@@ -61,7 +61,7 @@
               </button>
           </div>
           
-          <canvas id="the-canvas" style="display: none;"></canvas>
+          <canvas id="the-canvas"></canvas>
 
           <div class="action-buttons">
             <button class="btn btn-primary" onclick="downloadPDF()" id="downloadBtn" disabled>
@@ -151,7 +151,7 @@
     var pagesRead = new Set();
     var readAllPages = false;
     var pageStartTime = Date.now();
-    var minPageTime = 10000; // 10 seconds in milliseconds
+    var minPageTime = 5000; // 5 seconds in milliseconds
     var canChangePage = true;
     var startTime = Date.now();
     
@@ -217,25 +217,16 @@
     // Function to load new PDF
     function loadNewPdf(id) {
         currentPDFId = id;
-        url = `https://kn-uniqlo.github.io/location-survey/pdfs/${id}.pdf`;
-        
-        const canvas = document.getElementById('the-canvas');
-        canvas.style.display = 'block';
-        
+        url = `https://raw.githubusercontent.com/kn-uniqlo/location-survey/main/pdfs/${id}.pdf`;
         pdfjsLib.getDocument(url).promise.then(function(pdfDoc_) {
-            pdfDoc = pdfDoc_;
-            document.getElementById('page_count').textContent = pdfDoc.numPages;
-            pageNum = 1;
-            pagesRead.clear();
-            readAllPages = false;
-            document.getElementById('read-btn').disabled = true;
-            renderPage(pageNum);
-            enablePDFButtons();
-        }).catch(error => {
-            console.error('Error loading PDF:', error);
-            alert('ไม่พบไฟล์ PDF สำหรับสาขานี้');
-            // ซ่อน canvas หากโหลด PDF ไม่สำเร็จ
-            canvas.style.display = 'none';
+        pdfDoc = pdfDoc_;
+        document.getElementById('page_count').textContent = pdfDoc.numPages;
+        pageNum = 1;
+        pagesRead.clear();
+        readAllPages = false;
+        document.getElementById('read-btn').disabled = true;
+        renderPage(pageNum);
+        enablePDFButtons()
         });
     }
     
