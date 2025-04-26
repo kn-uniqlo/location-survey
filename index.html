@@ -234,17 +234,28 @@
 
     // Download PDF function
     function downloadPDF() {
-      if (!currentPDFId) {
-        const pdfUrl = `https://raw.githubusercontent.com/kn-uniqlo/location-survey/main/pdfs/${currentPDFId}.pdf`;
-        window.open(pdfUrl, '_blank');
+      if (currentPDFId) { 
+        const pdfUrl = `https://raw.githubusercontent.com/kn-uniqlo/location-survey/main/${currentPDFId}.pdf`;
+        
+        // สร้างลิงก์ดาวน์โหลด
+        const link = document.createElement('a');
+        link.href = pdfUrl;
+        link.download = `${currentPDFId}.pdf`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      } else {
+        alert('กรุณาเลือกสาขาก่อน');
       }
     }
     
     // View in new tab function
     function viewInNewTab() {
-      if (!currentPDFId) {
-        const pdfUrl = `https://raw.githubusercontent.com/kn-uniqlo/location-survey/main/pdfs/${currentPDFId}.pdf`;
+      if (currentPDFId) {  // เปลี่ยนจาก !currentPDFId เป็น currentPDFId
+        const pdfUrl = `https://raw.githubusercontent.com/kn-uniqlo/location-survey/main/${currentPDFId}.pdf`;
         window.open(pdfUrl, '_blank');
+      } else {
+        alert('กรุณาเลือกสาขาก่อน');
       }
     }
 
