@@ -536,10 +536,22 @@
       const today = new Date().toISOString().split('T')[0];
       document.getElementById('startDate').value = today;
       document.getElementById('endDate').value = today;
-
+    
       // Load branches data
       await loadBranches();
-
+    
+      // เพิ่ม event listener สำหรับปุ่ม adminBtn ตรงนี้เพียงครั้งเดียว
+      const adminBtn = document.getElementById('adminBtn');
+      if (adminBtn) {
+        adminBtn.addEventListener('click', toggleAdminPanel);
+      }
+    
+      // เพิ่ม event listener สำหรับปุ่ม filterStatsBtn
+      const filterStatsBtn = document.getElementById('filterStatsBtn');
+      if (filterStatsBtn) {
+        filterStatsBtn.addEventListener('click', loadStats);
+      }
+    
       // Show scroll to top button when scrolling down
       window.addEventListener('scroll', function() {
         const floatingBtn = document.querySelector('.floating-btn');
@@ -548,21 +560,13 @@
         } else {
           floatingBtn.style.display = 'none';
         }
-        const adminBtn = document.getElementById('adminBtn');
-        if (adminBtn) {
-          adminBtn.addEventListener('click', toggleAdminPanel);
-        }
-        const filterStatsBtn = document.getElementById('filterStatsBtn')
-        if (filterStatsBtn) {
-          filterStatsBtn.addEventListener('click', loadStats());
-        }
       });
-
+    
       // Finish container animation
       setTimeout(() => {
         document.querySelector('.container').style.top = '0';
       }, 100);
-
+    
       // ล็อกอินแบบไม่ระบุตัวตน (เพื่อใช้ Firebase Authentication)
       try {
         await auth.signInAnonymously();
