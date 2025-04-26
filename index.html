@@ -253,27 +253,11 @@
     // View in new tab function
     function viewInNewTab() {
       if (currentPDFId) {
-        const pdfUrl = `https://raw.githubusercontent.com/kn-uniqlo/location-survey/main/pdfs/${currentPDFId}.pdf`;
-        
-        // เปิดหน้าต่างใหม่
-        const newWindow = window.open('', '_blank');
-        
-        // สร้าง iframe สำหรับแสดง PDF
-        newWindow.document.write(`
-          <html>
-            <head>
-              <title>PDF Viewer</title>
-              <style>
-                body, html { margin: 0; padding: 0; height: 100%; }
-                iframe { width: 100%; height: 100%; border: none; }
-              </style>
-            </head>
-            <body>
-              <iframe src="${pdfUrl}"></iframe>
-            </body>
-          </html>
-        `);
-        newWindow.document.close();
+        const pdfUrl = encodeURIComponent(
+          `https://raw.githubusercontent.com/kn-uniqlo/location-survey/main/pdfs/${currentPDFId}.pdf`
+        );
+        const viewerUrl = `https://docs.google.com/viewer?url=${pdfUrl}&embedded=true`;
+        window.open(viewerUrl, '_blank');
       } else {
         alert('กรุณาเลือกสาขาก่อน');
       }
