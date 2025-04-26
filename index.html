@@ -236,7 +236,7 @@
     // Download PDF function
     function downloadPDF() {
       if (currentPDFId) { 
-        const pdfUrl = `https://raw.githubusercontent.com/kn-uniqlo/location-survey/main/${currentPDFId}.pdf`;
+        const pdfUrl = `https://raw.githubusercontent.com/kn-uniqlo/location-survey/main/pdfs/${currentPDFId}.pdf`;
         
         // สร้างลิงก์ดาวน์โหลด
         const link = document.createElement('a');
@@ -253,7 +253,7 @@
     // View in new tab function
     function viewInNewTab() {
       if (currentPDFId) {  // เปลี่ยนจาก !currentPDFId เป็น currentPDFId
-        const pdfUrl = `https://raw.githubusercontent.com/kn-uniqlo/location-survey/main/${currentPDFId}.pdf`;
+        const pdfUrl = `https://raw.githubusercontent.com/kn-uniqlo/location-survey/main/pdfs/${currentPDFId}.pdf`;
         window.open(pdfUrl, '_blank');
       } else {
         alert('กรุณาเลือกสาขาก่อน');
