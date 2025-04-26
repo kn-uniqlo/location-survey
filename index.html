@@ -217,7 +217,7 @@
     // Function to load new PDF
     function loadNewPdf(id) {
         currentPDFId = id;
-        url = `https://raw.githubusercontent.com/kn-uniqlo/location-survey/main/${id}.pdf`;
+        url = `https://raw.githubusercontent.com/kn-uniqlo/location-survey/main/pdfs/${id}.pdf`;
         pdfjsLib.getDocument(url).promise.then(function(pdfDoc_) {
         pdfDoc = pdfDoc_;
         document.getElementById('page_count').textContent = pdfDoc.numPages;
@@ -235,7 +235,7 @@
     // Download PDF function
     function downloadPDF() {
       if (!currentPDFId) {
-        const pdfUrl = `https://raw.githubusercontent.com/kn-uniqlo/location-survey/main/${currentPDFId}.pdf`;
+        const pdfUrl = `https://raw.githubusercontent.com/kn-uniqlo/location-survey/main/pdfs/${currentPDFId}.pdf`;
         window.open(pdfUrl, '_blank');
       }
     }
@@ -243,7 +243,7 @@
     // View in new tab function
     function viewInNewTab() {
       if (!currentPDFId) {
-        const pdfUrl = `https://raw.githubusercontent.com/kn-uniqlo/location-survey/main/${currentPDFId}.pdf`;
+        const pdfUrl = `https://raw.githubusercontent.com/kn-uniqlo/location-survey/main/pdfs/${currentPDFId}.pdf`;
         window.open(pdfUrl, '_blank');
       }
     }
