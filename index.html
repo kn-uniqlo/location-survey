@@ -617,7 +617,7 @@
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         
         // วาดพื้นหลัง
-        ctx.fillStyle = '#f5f5f5';
+        ctx.fillStyle = '#f8f8f8';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         
         // ตั้งค่าสไตล์ข้อความ
@@ -633,7 +633,7 @@
         ctx.fillText(message, canvas.width / 2, messageY);
         
         // วาดข้อความรอง
-        ctx.font = `${isMobile ? 14 : 18}px "Inter", sans-serif`;
+        ctx.font = `${isMobile ? 14 : 18}px "Noto Sans Thai", sans-serif`;
         ctx.fillStyle = '#999';
         const subMessage = 'เลือกสาขาจากช่องค้นหาด้านบน';
         const subMessageY = isMobile ? canvas.height / 2 + 20 : canvas.height / 2 + 30;
