@@ -1000,7 +1000,7 @@ footer {
 
   
   #the-canvas {
-      min-height: 400px;
+      min-height: 600px;
   }
 }
 
@@ -1044,7 +1044,7 @@ footer {
 /* Responsive Placeholder */
 @media (max-width: 768px) {
   .pdf-placeholder {
-    min-height: 400px;
+    min-height: 600px;
   }
   
   .pdf-placeholder i {
