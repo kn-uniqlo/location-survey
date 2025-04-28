@@ -732,8 +732,8 @@ footer {
   }
   
   .pdf-container, iframe {
-    min-height: 600px;
-    height: 600px;
+    min-height: 700px;
+    height: 700px;
   }
 }
 
@@ -763,8 +763,8 @@ footer {
   }
   
   .pdf-container, iframe {
-    min-height: 500px;
-    height: 500px;
+    min-height: 700px;
+    height: 700px;
   }
   
   .action-buttons {
@@ -820,8 +820,8 @@ footer {
   }
   
   .pdf-container, iframe {
-    min-height: 400px;
-    height: 400px;
+    min-height: 700px;
+    height: 700px;
   }
   
   .loading {
