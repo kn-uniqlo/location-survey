@@ -740,7 +740,8 @@ footer {
 @media (max-width: 768px) {
 
   #the-canvas {
-    min-height: 500px;
+    min-height: 400px;
+    transform-origin: top center;
   }
 
   header {
@@ -802,10 +803,10 @@ footer {
   }
 }
 
-@media (max-width: 576px) {
+@media (max-width: 480px) {
 
   #the-canvas {
-    min-height: 400px;
+    min-height: 300px;
   }
   
   header {
@@ -1027,6 +1028,4 @@ footer {
   font-size: 1rem;
   opacity: 0.8;
 }
-
-
 
