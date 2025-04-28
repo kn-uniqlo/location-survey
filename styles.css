@@ -243,7 +243,7 @@ h1 {
     0 0 0 1px rgba(255,255,255,0.3);
   margin-top: 2rem;
   background: linear-gradient(135deg, rgba(245,245,255,0.9), rgba(245,245,255,0.9));
-  min-height: 700px;
+  min-height: 800px;
   position: relative;
   transition: var(--transition);
   border: 1px solid rgba(255,255,255,0.4);
@@ -270,14 +270,6 @@ h1 {
   box-shadow: 
     0 12px 40px rgba(0, 0, 0, 0.15),
     0 0 0 1px rgba(255,255,255,0.4);
-}
-
-iframe {
-  display: block;
-  width: 100%;
-  height: 700px;
-  border: none;
-  background-color: transparent;
 }
 
 /* Animated Loading */
