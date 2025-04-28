@@ -217,16 +217,27 @@
     // Function to load new PDF
     function loadNewPdf(id) {
         currentPDFId = id;
-        url = `https://raw.githubusercontent.com/kn-uniqlo/location-survey/main/pdfs/${id}.pdf`;
+        url = `https://kn-uniqlo.github.io/location-survey/pdfs/${id}.pdf`;
+        
+        // แสดง canvas
+        const canvas = document.getElementById('the-canvas');
+        canvas.style.display = 'block';
+        
         pdfjsLib.getDocument(url).promise.then(function(pdfDoc_) {
-        pdfDoc = pdfDoc_;
-        document.getElementById('page_count').textContent = pdfDoc.numPages;
-        pageNum = 1;
-        pagesRead.clear();
-        readAllPages = false;
-        document.getElementById('read-btn').disabled = true;
-        renderPage(pageNum);
-        enablePDFButtons()
+            pdfDoc = pdfDoc_;
+            document.getElementById('page_count').textContent = pdfDoc.numPages;
+            pageNum = 1;
+            pagesRead.clear();
+            readAllPages = false;
+            document.getElementById('read-btn').disabled = true;
+            renderPage(pageNum);
+            enablePDFButtons();
+        }).catch(error => {
+            console.error('Error loading PDF:', error);
+            alert('ไม่พบไฟล์ PDF สำหรับสาขานี้');
+            // แสดงข้อความแจ้งเตือนเมื่อโหลด PDF ไม่สำเร็จ
+            initializeCanvas();
+            canvas.style.display = 'block';
         });
     }
     
@@ -591,6 +602,33 @@
       } catch (error) {
         console.error('Anonymous login failed:', error);
       }
+    });
+
+    function initializeCanvas() {
+        const canvas = document.getElementById('the-canvas');
+        const ctx = canvas.getContext('2d');
+        
+        // ตั้งค่าขนาด canvas
+        canvas.width = 800;
+        canvas.height = 600;
+        
+        // ล้าง canvas
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        // ตั้งค่าสไตล์ข้อความ
+        ctx.fillStyle = '#666';
+        ctx.font = '24px Noto Sans Thai, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        
+        // วาดข้อความ
+        const message = 'กรุณาเลือกสาขาเพื่อแสดงเอกสาร PDF';
+        ctx.fillText(message, canvas.width / 2, canvas.height / 2);
+    }
+
+    // เรียกใช้เมื่อหน้าเว็บโหลดเสร็จ
+    document.addEventListener('DOMContentLoaded', () => {
+        initializeCanvas();
     });
 </script>
 </body>
