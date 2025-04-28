@@ -727,17 +727,6 @@ footer {
   }
 }
 
-@media (max-width: 992px) {
-  .content {
-    padding: 2rem;
-  }
-  
-  .pdf-container, iframe {
-    min-height: 600px;
-    height: 600px;
-  }
-}
-
 @media (max-width: 768px) {
   header {
     padding: 2rem 1.5rem;
