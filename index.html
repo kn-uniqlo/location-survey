@@ -581,11 +581,6 @@
         }
       });
     
-      // Finish container animation
-      setTimeout(() => {
-        document.querySelector('.container').style.top = '0';
-      }, 100);
-    
       // ล็อกอินแบบไม่ระบุตัวตน (เพื่อใช้ Firebase Authentication)
       try {
         await auth.signInAnonymously();
