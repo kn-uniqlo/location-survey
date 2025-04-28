@@ -987,6 +987,7 @@ footer {
   border-radius: 10px;
   box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease;
+  display: none;
 }
 
 /* Hover Effect */
@@ -1009,5 +1010,52 @@ footer {
   #the-canvas {
       background: #1a1a1a;
       border-color: rgba(255, 255, 255, 0.05);
+  }
+}
+
+.pdf-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+  min-height: 600px;
+}
+
+.pdf-placeholder i {
+  font-size: 4rem;
+  color: #ccc;
+  margin-bottom: 1rem;
+}
+
+.pdf-placeholder p {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.pdf-placeholder small {
+  font-size: 0.9rem;
+  color: #999;
+}
+
+/* Responsive Placeholder */
+@media (max-width: 768px) {
+  .pdf-placeholder {
+    min-height: 400px;
+  }
+  
+  .pdf-placeholder i {
+    font-size: 3rem;
+  }
+  
+  .pdf-placeholder p {
+    font-size: 1rem;
+  }
+  
+  .pdf-placeholder small {
+    font-size: 0.8rem;
   }
 }
