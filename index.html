@@ -63,6 +63,10 @@
           
 
           <canvas id="the-canvas"></canvas>
+          <div id="canvas-placeholder" class="canvas-placeholder">
+            <i class="fas fa-store-alt"></i>
+            <p>กรุณาเลือกสาขาเพื่อแสดงข้อมูล PDF</p>
+          </div>
  
 
           <div class="action-buttons">
@@ -589,7 +593,11 @@
         console.error('Anonymous login failed:', error);
       }
     });
-
+    
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('canvas-placeholder').style.display = 'flex';
+      document.getElementById('the-canvas').style.display = 'none';
+    });
 </script>
 </body>
 </html>
