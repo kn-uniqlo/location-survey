@@ -555,6 +555,9 @@
       const today = new Date().toISOString().split('T')[0];
       document.getElementById('startDate').value = today;
       document.getElementById('endDate').value = today;
+        
+      const canvas = document.getElementById('the-canvas');
+      canvas.style.display = 'none'; // ซ่อนไว้ก่อนจนกว่าจะเรนเดอร์
     
       // Load branches data
       await loadBranches();
@@ -590,10 +593,6 @@
       }
     });
 
-    document.addEventListener('DOMContentLoaded', () => {
-      document.getElementById('canvas-placeholder').style.display = 'flex';
-      document.getElementById('the-canvas').style.display = 'none';
-    });
 </script>
 </body>
 </html>
