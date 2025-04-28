@@ -272,7 +272,6 @@ h1 {
     0 0 0 1px rgba(255,255,255,0.4);
 }
 
-
 /* Animated Loading */
 .loading {
   font-size: small;
@@ -799,6 +798,48 @@ footer {
 }
 
 @media (max-width: 576px) {
+
+  .pdf-container, iframe {
+    min-height: 300px;
+    height: 300px;
+    width: 100%;
+    margin: 0;
+    border-radius: 0;
+  }
+
+  #the-canvas {
+    min-height: 300px;
+    height: 300px;
+    width: 100%;
+    margin: 0;
+    border-radius: 0;
+  }
+
+    .pdf-controls {
+    position: fixed;
+    bottom: 0;
+    top: auto;
+    left: 0;
+    right: 0;
+    padding: 0.5rem;
+    background: rgba(255,255,255,0.95);
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+  }
+
+  .pdf-nav {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .pdf-btn {
+    padding: 0.5rem;
+    font-size: 0.8rem;
+  }
+
+  .pdf-status {
+    display: none;
+  }
+
   header {
     padding: 1.5rem 1rem;
   }
