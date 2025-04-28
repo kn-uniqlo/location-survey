@@ -1028,17 +1028,5 @@ footer {
   opacity: 0.8;
 }
 
-.zoom-controls {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-left: auto;
-}
-
-#zoomLevel {
-  font-size: 0.9rem;
-  min-width: 40px;
-  text-align: center;
-}
 
 
