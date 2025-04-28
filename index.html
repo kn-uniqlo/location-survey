@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>UNIQLO STORE LOCATION SURVEY | 2025</title>
+    <title>UNIQLO Store Location Survey | 2025</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -59,26 +59,15 @@
               <button id="read-btn" class="pdf-btn read-btn" disabled>
                   <i class="fas fa-check-circle"></i> Mark as Read
               </button>
-              <div class="zoom-controls">
-                <button id="zoomOut" class="pdf-btn" title="Zoom Out">
-                  <i class="fas fa-search-minus"></i>
-                </button>
-                <span id="zoomLevel">100%</span>
-                <button id="zoomIn" class="pdf-btn" title="Zoom In">
-                  <i class="fas fa-search-plus"></i>
-                </button>
-              </div>
           </div>
           
 
-          <div class="pdf-viewer">
             <div id="canvasPlaceholder" class="canvas-placeholder">
               <div class="loading-icon"><i class="fas fa-file-pdf"></i></div>
               <div class="main-message">กรุณาเลือกสาขาเพื่อแสดง Location Survey</div>
               <div class="sub-message">ระบบจะแสดงข้อมูลรายละเอียดของสาขาที่คุณเลือก</div>
             </div>
             <canvas id="the-canvas"></canvas>
-          </div>
  
 
           <div class="action-buttons">
@@ -173,10 +162,7 @@
     var canChangePage = true;
     var startTime = Date.now();
     
-    let currentScale = 1.0;
-    const zoomStep = 0.25;
-    const minScale = 0.5;
-    const maxScale = 3.0;
+    let branchesData = null;
     
     // Function to load branches data
     async function loadBranches() {
@@ -310,7 +296,7 @@
     
         // Using promise to fetch the page
         pdfDoc.getPage(num).then(function(page) {
-        var viewport = page.getViewport({scale: currentScale * scale});
+        var viewport = page.getViewport({scale: scale});
         canvas.height = viewport.height;
         canvas.width = viewport.width;
     
@@ -609,43 +595,6 @@
       } catch (error) {
         console.error('Anonymous login failed:', error);
       }
-
-      function resetZoom() {
-        updateZoom(1.0);
-      }
-
-      document.getElementById('resetZoom').addEventListener('click', resetZoom);
-
-      function updateZoom(scale) {
-        currentScale = Math.min(Math.max(scale, minScale), maxScale);
-        document.getElementById('zoomLevel').textContent = `${Math.round(currentScale * 100)}%`;
-        renderPage(pageNum);
-      }
-
-      function zoomIn() {
-        updateZoom(currentScale + zoomStep);
-      }
-
-      function zoomOut() {
-        updateZoom(currentScale - zoomStep);
-      }
-
-      // Add event listeners for zoom controls
-      document.getElementById('zoomIn').addEventListener('click', zoomIn);
-      document.getElementById('zoomOut').addEventListener('click', zoomOut);
-
-      // Optional: Add keyboard shortcuts for zoom
-      document.addEventListener('keydown', function(e) {
-        if (e.ctrlKey || e.metaKey) {
-          if (e.key === '+' || e.key === '=') {
-            e.preventDefault();
-            zoomIn();
-          } else if (e.key === '-') {
-            e.preventDefault();
-            zoomOut();
-          }
-        }
-      });
     });
 
 </script>
