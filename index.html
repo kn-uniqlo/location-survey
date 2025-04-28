@@ -233,6 +233,8 @@
             pagesRead.clear();
             readAllPages = false;
             document.getElementById('read-btn').disabled = true;
+            document.getElementById('canvasPlaceholder').style.display = 'none';
+            document.getElementById('the-canvas').style.display = 'block';
             renderPage(pageNum);
             enablePDFButtons();
         });
