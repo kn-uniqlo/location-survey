@@ -61,7 +61,14 @@
               </button>
           </div>
           
+          <div class="pdf-container">
+            <div id="pdfPlaceholder" class="pdf-placeholder">
+              <i class="fas fa-file-pdf"></i>
+              <p>กรุณาเลือกสาขาเพื่อแสดงเอกสาร PDF</p>
+              <small>เลือกสาขาจากช่องค้นหาด้านบน</small>
+            </div>
           <canvas id="the-canvas"></canvas>
+          </div>
 
           <div class="action-buttons">
             <button class="btn btn-primary" onclick="downloadPDF()" id="downloadBtn" disabled>
@@ -236,8 +243,8 @@
             console.error('Error loading PDF:', error);
             alert('ไม่พบไฟล์ PDF สำหรับสาขานี้');
             // แสดงข้อความแจ้งเตือนเมื่อโหลด PDF ไม่สำเร็จ
-            initializeCanvas();
-            canvas.style.display = 'block';
+            placeholder.style.display = 'flex';
+            canvas.style.display = 'none';
         });
     }
     
@@ -604,46 +611,6 @@
       }
     });
 
-    function initializeCanvas() {
-        const canvas = document.getElementById('the-canvas');
-        const ctx = canvas.getContext('2d');
-        
-        // ตั้งค่าขนาด canvas ตามขนาดหน้าจอ
-        const isMobile = window.innerWidth <= 768;
-        canvas.width = isMobile ? window.innerWidth * 0.9 : 800;
-        canvas.height = isMobile ? window.innerHeight * 0.5 : 600;
-        
-        // ล้าง canvas
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        
-        // วาดพื้นหลัง
-        ctx.fillStyle = '#f8f8f8';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        
-        // ตั้งค่าสไตล์ข้อความ
-        ctx.fillStyle = '#666';
-        const mainFontSize = isMobile ? 20 : 28;
-        ctx.font = `bold ${mainFontSize}px "Noto Sans Thai", sans-serif`;
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        
-        // วาดข้อความหลัก
-        const message = 'กรุณาเลือกสาขาเพื่อแสดงเอกสาร PDF';
-        const messageY = isMobile ? canvas.height / 2 - 20 : canvas.height / 2 - 30;
-        ctx.fillText(message, canvas.width / 2, messageY);
-        
-        // วาดข้อความรอง
-        ctx.font = `${isMobile ? 14 : 18}px "Noto Sans Thai", sans-serif`;
-        ctx.fillStyle = '#999';
-        const subMessage = 'เลือกสาขาจากช่องค้นหาด้านบน';
-        const subMessageY = isMobile ? canvas.height / 2 + 20 : canvas.height / 2 + 30;
-        ctx.fillText(subMessage, canvas.width / 2, subMessageY);
-        }
-    
-    // เรียกใช้เมื่อหน้าเว็บโหลดเสร็จ
-    document.addEventListener('DOMContentLoaded', () => {
-        initializeCanvas();
-    });
 </script>
 </body>
 </html>
