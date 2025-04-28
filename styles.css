@@ -243,7 +243,7 @@ h1 {
     0 0 0 1px rgba(255,255,255,0.3);
   margin-top: 2rem;
   background: linear-gradient(135deg, rgba(245,245,255,0.9), rgba(245,245,255,0.9));
-  min-height: 800px;
+  min-height: 700px;
   position: relative;
   transition: var(--transition);
   border: 1px solid rgba(255,255,255,0.4);
@@ -973,7 +973,7 @@ footer {
 #the-canvas {
   width: 100%;
   height: auto;
-  min-height: 600px;
+  min-height: 700px;
   background: #2d2d2d;
   border: 1px solid rgba(79, 79, 79, 0.1);
   border-radius: 10px;
@@ -992,7 +992,7 @@ footer {
 
   
   #the-canvas {
-      min-height: 600px;
+      min-height: 700px;
   }
 }
 
