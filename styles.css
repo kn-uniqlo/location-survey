@@ -980,6 +980,7 @@ footer {
   border-radius: 10px;
   box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease;
+  display: none;
 }
 
 /* Hover Effect */
