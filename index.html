@@ -61,7 +61,14 @@
               </button>
           </div>
           
+          <div class="pdf-container">
+            <div id="pdfPlaceholder" class="pdf-placeholder">
+              <i class="fas fa-file-pdf"></i>
+              <p>กรุณาเลือกสาขาเพื่อแสดงเอกสาร PDF</p>
+              <small>เลือกสาขาจากช่องค้นหาด้านบน</small>
+            </div>
           <canvas id="the-canvas"></canvas>
+          </div>
 
           <div class="action-buttons">
             <button class="btn btn-primary" onclick="downloadPDF()" id="downloadBtn" disabled>
@@ -217,16 +224,29 @@
     // Function to load new PDF
     function loadNewPdf(id) {
         currentPDFId = id;
-        url = `https://raw.githubusercontent.com/kn-uniqlo/location-survey/main/pdfs/${id}.pdf`;
+        url = `https://kn-uniqlo.github.io/location-survey/pdfs/${id}.pdf`;
+        
+        // แสดง canvas
+        const placeholder = document.getElementById('pdfPlaceholder');
+        const canvas = document.getElementById('the-canvas');
+        placeholder.style.display = 'none';
+        canvas.style.display = 'block';
+        
         pdfjsLib.getDocument(url).promise.then(function(pdfDoc_) {
-        pdfDoc = pdfDoc_;
-        document.getElementById('page_count').textContent = pdfDoc.numPages;
-        pageNum = 1;
-        pagesRead.clear();
-        readAllPages = false;
-        document.getElementById('read-btn').disabled = true;
-        renderPage(pageNum);
-        enablePDFButtons()
+            pdfDoc = pdfDoc_;
+            document.getElementById('page_count').textContent = pdfDoc.numPages;
+            pageNum = 1;
+            pagesRead.clear();
+            readAllPages = false;
+            document.getElementById('read-btn').disabled = true;
+            renderPage(pageNum);
+            enablePDFButtons();
+        }).catch(error => {
+            console.error('Error loading PDF:', error);
+            alert('ไม่พบไฟล์ PDF สำหรับสาขานี้');
+            // แสดงข้อความแจ้งเตือนเมื่อโหลด PDF ไม่สำเร็จ
+            placeholder.style.display = 'flex';
+            canvas.style.display = 'none';
         });
     }
     
@@ -592,6 +612,7 @@
         console.error('Anonymous login failed:', error);
       }
     });
+
 </script>
 </body>
 </html>
