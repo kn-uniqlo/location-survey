@@ -989,6 +989,7 @@ footer {
   border-radius: 10px;
   box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease;
+  display: none;
 }
 
 /* Hover Effect */
@@ -997,6 +998,35 @@ footer {
   box-shadow: 0 0 40px rgba(0, 0, 0, 0.4);
 }
 
+/* เพิ่มคลาสสำหรับแสดง Canvas */
+#the-canvas.show {
+  display: block;
+}
+
+/* เพิ่มข้อความแจ้งเมื่อ Canvas ซ่อนอยู่ */
+.canvas-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 600px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  padding: 2rem;
+  text-align: center;
+  color: var(--uniqlo-gray);
+}
+
+.canvas-placeholder .main-message {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.canvas-placeholder .sub-message {
+  font-size: 1rem;
+  opacity: 0.8;
+}
 
 
 
