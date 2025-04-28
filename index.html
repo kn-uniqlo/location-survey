@@ -608,9 +608,10 @@
         const canvas = document.getElementById('the-canvas');
         const ctx = canvas.getContext('2d');
         
-        // ตั้งค่าขนาด canvas
-        canvas.width = 800;
-        canvas.height = 600;
+        // ตั้งค่าขนาด canvas ตามขนาดหน้าจอ
+        const isMobile = window.innerWidth <= 768;
+        canvas.width = isMobile ? window.innerWidth * 0.9 : 800;
+        canvas.height = isMobile ? window.innerHeight * 0.5 : 600;
         
         // ล้าง canvas
         ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -621,20 +622,24 @@
         
         // ตั้งค่าสไตล์ข้อความ
         ctx.fillStyle = '#666';
-        ctx.font = 'bold 28px "Noto Sans Thai", sans-serif';
+        const mainFontSize = isMobile ? 20 : 28;
+        ctx.font = `bold ${mainFontSize}px "Noto Sans Thai", sans-serif`;
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         
         // วาดข้อความหลัก
         const message = 'กรุณาเลือกสาขาเพื่อแสดงเอกสาร PDF';
-        ctx.fillText(message, canvas.width / 2, canvas.height / 2 - 30);
+        const messageY = isMobile ? canvas.height / 2 - 20 : canvas.height / 2 - 30;
+        ctx.fillText(message, canvas.width / 2, messageY);
         
         // วาดข้อความรอง
+        ctx.font = `${isMobile ? 14 : 18}px "Inter", sans-serif`;
         ctx.fillStyle = '#999';
         const subMessage = 'เลือกสาขาจากช่องค้นหาด้านบน';
-        ctx.fillText(subMessage, canvas.width / 2, canvas.height / 2 + 30);
+        const subMessageY = isMobile ? canvas.height / 2 + 20 : canvas.height / 2 + 30;
+        ctx.fillText(subMessage, canvas.width / 2, subMessageY);
         }
-
+    
     // เรียกใช้เมื่อหน้าเว็บโหลดเสร็จ
     document.addEventListener('DOMContentLoaded', () => {
         initializeCanvas();
