@@ -227,7 +227,9 @@
         url = `https://kn-uniqlo.github.io/location-survey/pdfs/${id}.pdf`;
         
         // แสดง canvas
+        const placeholder = document.getElementById('pdfPlaceholder');
         const canvas = document.getElementById('the-canvas');
+        placeholder.style.display = 'none';
         canvas.style.display = 'block';
         
         pdfjsLib.getDocument(url).promise.then(function(pdfDoc_) {
