@@ -893,7 +893,7 @@ footer {
 /* Dark Mode Toggle (Future Feature) */
 .dark-mode-toggle {
   position: fixed;
-  bottom: 7rem;
+  bottom: 9rem;
   right: 2.5rem;
   width: 3.5rem;
   height: 3.5rem;
@@ -940,7 +940,7 @@ footer {
 }
 
 .pdf-btn {
-  padding: 0.5rem 0.1rem;
+  padding: 0.4rem 0.1rem;
   border: 1px solid #ddd;
   border-radius: 4px;
   background: #f5f5f5;
@@ -972,7 +972,7 @@ footer {
 }
 
 .pdf-status {
-  font-size: small;
+  font-size: medium;
   font-weight: 500;
   color: #666;
   margin: 2 2rem;
